@@ -3,7 +3,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Periodo {
+import javax.swing.JOptionPane;
+
+	public class Periodo {
+	
+	private static int ID;
+	
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
+	}
+
+	
 	private int id;
 	private int anio;
 	private String tipo;
@@ -68,13 +82,32 @@ public class Periodo {
 		this.cuentas = cuentas;
 	}
 	
-	public void addCuenta(Cuenta cuenta){
-		this.cuentas.add(cuenta);
+	public int addCuenta(Cuenta cuenta){
+		int a;
+		if(!this.estaCuenta(cuenta)){//no esta la cuenta
+			this.cuentas.add(cuenta);
+			a=3;
+		}else{//esta la cuenta
+			int input = JOptionPane.showConfirmDialog(null, "La cuenta se encuentra para ese periodo\n"
+						+ "¿Deseas agregarla de todos modos?", "Elija una opción",
+						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (input==0){//modifica
+				this.deleteCuenta(cuenta);
+				this.getCuentas().add(cuenta);
+				a=0;
+			}else{//noModifica
+				a=4;
+			}
+		}
+		return a;
 	}
 	
 
 	public void deleteCuenta(Cuenta cuenta){
-		this.cuentas.remove(cuenta);
+		this.setCuentas(this.getCuentas().
+							stream().
+							filter(e->!	e.esCuenta(cuenta)).
+							collect(Collectors.toCollection(ArrayList::new)));
 	}
 
 
@@ -106,6 +139,19 @@ public class Periodo {
 	public static int getNextId(Empresa empresa){
 		ArrayList<Periodo> periodos = empresa.getPeriodos();
 		return periodos.size() + 1;
+	}
+
+	public boolean esPeriodo(Periodo periodo) {
+		return (this.anio==periodo.anio&&this.tipo.equalsIgnoreCase(periodo.tipo));
+		
+	}
+
+	public boolean estaCuenta(Cuenta cuenta) {
+		return (this.getCuentas().
+				stream().
+				filter(e->e.esCuenta(cuenta)).
+				findFirst().
+				isPresent());
 	}
 
 

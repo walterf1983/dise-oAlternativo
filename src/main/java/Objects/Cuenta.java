@@ -44,6 +44,11 @@ package Objects;
 			this.setNombre(nombre);
 			this.setValor(valor);
 		}
+
+
+		public boolean esCuenta(Cuenta cuenta) {
+			return this.getName().equalsIgnoreCase(cuenta.getName());
+		}
 	}
 
 

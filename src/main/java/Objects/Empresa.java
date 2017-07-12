@@ -1,6 +1,7 @@
 package Objects;
 import java.io.Serializable;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,6 +9,16 @@ import java.util.stream.Collectors;
 @SuppressWarnings("serial")
 public class Empresa extends Item implements Serializable{
 	
+	private static int ID;
+	
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
+	}
+
 	private int id;
 	private String nombreEmpresa;
 	private ArrayList<Periodo> periodos;
@@ -48,8 +59,44 @@ public class Empresa extends Item implements Serializable{
 	public ArrayList<Periodo> getPeriodos(){
 		return periodos;
 	}
+	
+	public int addCuenta(Cuenta cuenta, Periodo periodo){
+
+		int a;
+		
+		if(!this.estaPeriodo(periodo)){//no está el periodo
+			this.getPeriodos().add(periodo);
+			a=2;
+		}else{//esta el periodo
+			a=this.getPeriodo(periodo).addCuenta(cuenta);
+		}
+		return a;
+	}
+	
+	public boolean estaCuenta(Cuenta cuenta,Periodo periodo) {
+		return this.getPeriodo(periodo).estaCuenta(cuenta);
+	}
+
+	public Periodo getPeriodo(Periodo periodo) {
+		return (this.getPeriodos().
+				stream().
+				filter(e->e.esPeriodo(periodo)).
+				findFirst().
+				get());
+		
+	}
+
+	public boolean estaPeriodo(Periodo periodo) {
+		return (this.getPeriodos().
+				stream().
+				filter(e->e.esPeriodo(periodo)).
+				findFirst().
+				isPresent());
+		}
 
 	/* Static methods */
+	
+
 	
 	public static  String[] getNombresEmpresas(ArrayList<? extends Item> empresas) {
 		List<String> result = empresas.stream()

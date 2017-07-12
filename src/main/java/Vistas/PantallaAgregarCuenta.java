@@ -208,16 +208,27 @@ public class PantallaAgregarCuenta extends JFrame {
 					int indexA=win.getComboAnio().getSelectedIndex();
 					int indexT=win.getComboTipo().getSelectedIndex();
 					
-					if(repoEmpresa.addCuenta(inEmpresa.getText(),inAnio.getText(),(String)comboPeriodo.getSelectedItem(),inCuenta.getText(),inValor.getText())==0){
-						win.getComboEmpresa().setSelectedIndex(indexE);
-						win.getComboAnio().setSelectedIndex(indexA);
-						win.getComboTipo().setSelectedIndex(indexT);
-						JOptionPane.showMessageDialog(null,"Cuenta agregada.","Información" ,JOptionPane.INFORMATION_MESSAGE);
-					}
+					int agregado=repoEmpresa.addCuenta(inEmpresa.getText(),inAnio.getText(),(String)comboPeriodo.getSelectedItem(),inCuenta.getText(),inValor.getText());
+					if(agregado==0){
+						JOptionPane.showMessageDialog(null,"Cuenta existente agregada.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+					}else
+						if(agregado==1)
+							JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa nueva.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+						else 
+							if(agregado==2)
+								JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente sin el periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+							else 
+								if(agregado==3)
+									JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente con existencia de periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+					win.getComboEmpresa().setSelectedIndex(indexE);
+					win.getComboAnio().setSelectedIndex(indexA);
+					win.getComboTipo().setSelectedIndex(indexT);
+				
 				}catch(Exception e){
 							PantallaCuentas win=(PantallaCuentas)fatherWindow;
 							win.getComboEmpresa().insertItemAt(inEmpresa.getText(),win.getComboEmpresa().getItemCount());
-							JOptionPane.showMessageDialog(null,"Empresa con cuenta agregada.", "Información",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,"Empresa nueva con cuenta agregada.", "Información",JOptionPane.INFORMATION_MESSAGE);
+							e.printStackTrace();
 						}
 					}
 				});
