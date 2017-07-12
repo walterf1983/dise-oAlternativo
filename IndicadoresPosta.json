@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "formula": "facturacion-perdida",
+    "name": "ganancia",
+    "cuentasName": [
+      "facturacion",
+      "perdida"
+    ],
+    "indicadores": [],
+    "mutable": true
+  },
+  {
+    "id": 3,
+    "formula": "IBITDA*2",
+    "name": "indicado",
+    "cuentasName": [
+      "IBITDA",
+      "saldo"
+    ],
+    "indicadores": [],
+    "mutable": true
+  },
+  {
+    "id": 5,
+    "formula": "IBITDA+saldo",
+    "name": "rudo",
+    "cuentasName": [
+      "IBITDA",
+      "saldo"
+    ],
+    "indicadores": [],
+    "mutable": true
+  },
+  {
+    "id": 4,
+    "formula": "IBITDA",
+    "name": "re",
+    "cuentasName": [
+      "IBITDA",
+      "saldo"
+    ],
+    "indicadores": [],
+    "mutable": true
+  }
+]

@@ -1,0 +1,269 @@
+[
+  {
+    "id": 2,
+    "nombreEmpresa": "Twitter",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2016,
+        "tipo": "A",
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 11
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 14
+          },
+          {
+            "idCuenta": 3,
+            "nombre": "neto_asociado",
+            "valor": 15
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "anio": 2015,
+        "tipo": "1S",
+        "cuentas": [
+          {
+            "idCuenta": 3,
+            "nombre": "Valor_Neto",
+            "valor": 17
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 19
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nombreEmpresa": "Techin",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2016,
+        "tipo": "A",
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 21
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 22
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "anio": 2016,
+        "tipo": "2S",
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 23
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 24
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "anio": 2015,
+        "tipo": "1S",
+        "cuentas": [
+          {
+            "idCuenta": 4,
+            "nombre": "indice_amortiguación",
+            "valor": 27
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 29
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 29
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 29
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 29
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 29
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 29
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "nombreEmpresa": "Facebook",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2016,
+        "tipo": "A",
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 3
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 5
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "anio": 2015,
+        "tipo": "1S",
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 6
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nombreEmpresa": "Barreiros",
+    "periodos": [
+      {
+        "id": 6,
+        "anio": 2010,
+        "tipo": "2S",
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "masa",
+            "valor": 98.38
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "anio": 2011,
+        "tipo": "2S",
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "grasa",
+            "valor": 6.7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nombreEmpresa": "Fara",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2010,
+        "tipo": "1S",
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "necesidad",
+            "valor": 78.7
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "anio": 2010,
+        "tipo": "2S",
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "necesididad",
+            "valor": 56
+          },
+          {
+            "idCuenta": 5,
+            "nombre": "calculo",
+            "valor": 45
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nombreEmpresa": "Ford",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2010,
+        "tipo": "1S",
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "holding",
+            "valor": 872.4
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "anio": 2010,
+        "tipo": "2S",
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "holding",
+            "valor": 45
+          },
+          {
+            "idCuenta": 5,
+            "nombre": "cashflow",
+            "valor": 35
+          }
+        ]
+      }
+    ]
+  }
+]
