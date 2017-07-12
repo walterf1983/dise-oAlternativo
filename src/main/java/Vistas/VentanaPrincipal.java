@@ -44,7 +44,7 @@ public class VentanaPrincipal extends JFrame{
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setIconTextGap(7);
-		lblNewLabel.setIcon(new ImageIcon("E:\\Materias\\Dise\u00F1o\\PruebaPildoras\\ProgramarClaseSwing\\src\\Ventanas\\gato-18.gif"));
+		lblNewLabel.setIcon(new ImageIcon("gato-18.gif"));
 		lblNewLabel.setBounds(10, 101, 243, 184);
 		contentPane.add(lblNewLabel);
 		
