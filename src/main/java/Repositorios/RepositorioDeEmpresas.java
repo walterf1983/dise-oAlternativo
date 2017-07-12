@@ -81,17 +81,17 @@ public class RepositorioDeEmpresas extends RepositorioGenerico {
 	//falta recauchutarlo y agregar una cuenta ue esta repetida
 	public int addCuenta(String nombreEmpresa, String anio, String tipo, String cuenta, String valor)throws Exception {
 		
+		Double value=Double.parseDouble(valor);
 		Empresa empresa = null;	
 		ArrayList<Periodo>periodos=new ArrayList<Periodo>();
-		Double value=Double.parseDouble(valor);
 		ArrayList<Cuenta> aCuentas=new ArrayList<Cuenta>();
 		aCuentas.add(new Cuenta(5,cuenta,value));
+				
 		int u=0;
 		try{	
 		empresa=this.getxNombreEmpresa(nombreEmpresa);
 		System.out.println("estaba la empresa");
 		}catch(Exception e){
-			System.out.println("No estaba la empresa");//verificado
 			periodos.add(new Periodo(0, Integer.parseInt(anio),tipo,aCuentas));
 			this.add(new Empresa(this.getLastId(),nombreEmpresa,periodos));
 		}
@@ -105,11 +105,9 @@ public class RepositorioDeEmpresas extends RepositorioGenerico {
 						findFirst().isPresent());
 
 		if(!a){
-			System.out.println("No estaba el periodo"+periodos.size());//verificado
 			periodos.add(new Periodo(6,Integer.parseInt(anio),tipo,aCuentas));
 			this.update(nombreEmpresa, new Empresa(this.getLastId(),nombreEmpresa,periodos));
 		}else{
-			System.out.println("Estaba el periodo"+periodos.size());
 			Periodo periodo=periodos.stream().
 					filter(e->e.getAnio()==Integer.parseInt(anio) && e.getTipo().equals(tipo)).
 					findFirst().get();
@@ -117,7 +115,6 @@ public class RepositorioDeEmpresas extends RepositorioGenerico {
 					filter(e->e.getName().equalsIgnoreCase(cuenta)).
 					findFirst().isPresent();
 			if(!c){
-				System.out.println("No estaba la cuenta"+periodos.size());//verificado
 				periodo.addCuenta(aCuentas.get(0));
 				
 				ArrayList<Periodo> periodos1=periodos.
@@ -129,19 +126,26 @@ public class RepositorioDeEmpresas extends RepositorioGenerico {
 				this.update(nombreEmpresa, new Empresa(this.getLastId(),nombreEmpresa,periodos1));
 				
 			}else{
-				System.out.println("Estaba la cuenta");
-			 int input = JOptionPane.showConfirmDialog(null, "La cuenta se encuentra para ese periodo\n"
+				int input = JOptionPane.showConfirmDialog(null, "La cuenta se encuentra para ese periodo\n"
 			 											+ "¿Deseas agregarla de todos modos?", "Elija una opción",
-			 											JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			 u=input;
-			 if(input==0){
-					System.out.println("Modifica");
-					
-			 	}else{
-			 		System.out.println("No Modifica");
-			 	}
+			 											JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				u=input;
+				if(input==0){
+					aCuentas.addAll(periodo.getCuentas().stream().
+							filter(e->!e.getName().equalsIgnoreCase(cuenta)).
+							collect(Collectors.toCollection(ArrayList::new)));
+					periodo.setCuentas(aCuentas);
+					ArrayList<Periodo> periodos2=periodos.
+												stream().
+												filter(e->!(e.getAnio()==Integer.parseInt(anio) && e.getTipo().equals(tipo))).
+												collect(Collectors.toCollection(ArrayList::new));
+					periodos2.add(periodo);
+					this.update(nombreEmpresa, new Empresa(this.getLastId(), nombreEmpresa, periodos2));	
+				}else{
+				}
 			}
 		}
 		return u;
-	}
+		}
+	
 }

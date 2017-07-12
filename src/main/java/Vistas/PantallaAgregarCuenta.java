@@ -204,10 +204,14 @@ public class PantallaAgregarCuenta extends JFrame {
 				}
 				try {
 					PantallaCuentas win=(PantallaCuentas)fatherWindow;
+					int indexE=win.getComboEmpresa().getSelectedIndex();
+					int indexA=win.getComboAnio().getSelectedIndex();
+					int indexT=win.getComboTipo().getSelectedIndex();
+					
 					if(repoEmpresa.addCuenta(inEmpresa.getText(),inAnio.getText(),(String)comboPeriodo.getSelectedItem(),inCuenta.getText(),inValor.getText())==0){
-						win.getComboEmpresa().setSelectedIndex(win.getComboEmpresa().getSelectedIndex());
-						win.getComboAnio().setSelectedIndex(win.getComboAnio().getSelectedIndex());
-						win.getComboTipo().setSelectedIndex(win.getComboTipo().getSelectedIndex());
+						win.getComboEmpresa().setSelectedIndex(indexE);
+						win.getComboAnio().setSelectedIndex(indexA);
+						win.getComboTipo().setSelectedIndex(indexT);
 						JOptionPane.showMessageDialog(null,"Cuenta agregada.","Información" ,JOptionPane.INFORMATION_MESSAGE);
 					}
 				}catch(Exception e){
@@ -230,9 +234,9 @@ public class PantallaAgregarCuenta extends JFrame {
 			this.comboPeriodo.setSelectedItem(pantalla.getComboTipo().getSelectedItem());
 			this.comboPeriodo.setEnabled(false);
 		}
-	}
+		}
 	
-	private boolean asegurarIngresoTextoUsuario(String caracteresValidos,String ingreso){
+		private boolean asegurarIngresoTextoUsuario(String caracteresValidos,String ingreso){
 			for(int i=0;i<ingreso.length();i++){
 				if(!caracteresValidos.contains(String.valueOf(ingreso.charAt(i)))){
 					return true;
@@ -241,45 +245,45 @@ public class PantallaAgregarCuenta extends JFrame {
 			return false;
 		}
 	
-	private void posicionarPantalla(JFrame fatherWindow){
-		JFrame windowLocation=fatherWindow;
-		if(fatherWindow.getClass().getName().equalsIgnoreCase("vistas.PantallaCargarCuentas")){
-			PantallaCargarCuentas pantalla=(PantallaCargarCuentas)fatherWindow;
-			windowLocation=pantalla.getFather();
-		}
+		private void posicionarPantalla(JFrame fatherWindow){
+			JFrame windowLocation=fatherWindow;
+			if(fatherWindow.getClass().getName().equalsIgnoreCase("vistas.PantallaCargarCuentas")){
+				PantallaCargarCuentas pantalla=(PantallaCargarCuentas)fatherWindow;
+				windowLocation=pantalla.getFather();
+			}
 		
-		int posRX=windowLocation.getX();
-		int posRY=windowLocation.getY();
+			int posRX=windowLocation.getX();
+			int posRY=windowLocation.getY();
 		
-		if(PantallaAgregarCuenta.countInstance==1){
-			this.setBounds(posRX+450,posRY,450,273);
-			PantallaAgregarCuenta.setPosY(posRY+273);
+			if(PantallaAgregarCuenta.countInstance==1){
+				this.setBounds(posRX+450,posRY,450,273);
+				PantallaAgregarCuenta.setPosY(posRY+273);
 			}else{
 				this.setBounds(posRX+450,PantallaAgregarCuenta.getPosY(),450,273);
 			}
-		setVisible(true);
-	}
+			setVisible(true);
+		}
+	
 		private int comprobarIngresosDeUsuario(){
 			if(inEmpresa.getText().equals("")){
 				JOptionPane.showMessageDialog(null,"Complete el nombre de la empresa","Información.",JOptionPane.INFORMATION_MESSAGE);
 				return -1;
 			}
-
 			if(inAnio.getText().equals("")){
 				JOptionPane.showMessageDialog(null,"Complete el año del periodo","Información.",JOptionPane.INFORMATION_MESSAGE);
 				return -1;
 			}else{
 				if(this.asegurarIngresoTextoUsuario("0123456789",inAnio.getText())){
-				JOptionPane.showMessageDialog(null,"Ingrese solo numeros para ingresar el año.","Información",JOptionPane.INFORMATION_MESSAGE);
-				return-1;
+					JOptionPane.showMessageDialog(null,"Ingrese solo numeros para ingresar el año.","Información",JOptionPane.INFORMATION_MESSAGE);
+					return-1;
 				}
 			}
-			
+		
 			if(inCuenta.getText().equals("")){
 				JOptionPane.showMessageDialog(null,"Complete el nombre de la cuenta.","Información",JOptionPane.INFORMATION_MESSAGE);
 				return -1;
 			}
-			
+		
 			if(inValor.getText().equals("")){
 				JOptionPane.showMessageDialog(null,"Complete el valor de la cuenta.","Información",JOptionPane.INFORMATION_MESSAGE);
 				return -1;
@@ -300,6 +304,6 @@ public class PantallaAgregarCuenta extends JFrame {
 				}
 			}
 			return 0;
-	}
-		
+		}
+
 }

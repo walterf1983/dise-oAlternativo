@@ -101,6 +101,7 @@ public class PantallaCuentas extends JFrame {
 		setContentPane(contentPane);
 		
 		comboEmpresa = new JComboBox<String>();
+		comboEmpresa.setBackground(Color.WHITE);
 		comboEmpresa.setBounds(16, 59, 177, 25);
 		contentPane.add(comboEmpresa);
 		
