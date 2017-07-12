@@ -8,13 +8,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 @SuppressWarnings("serial")
-public class VentanaWBuilder extends JFrame {
+public class VentanaPrincipal1 extends JFrame {
 	
 
 	@SuppressWarnings("unused")
 	private JPanel contentPane;
 
-	public VentanaWBuilder() {
+	public VentanaPrincipal1() {
 		setFont(new Font("Segoe Print", Font.PLAIN, 12));
 		setResizable(false);
 		this.setUndecorated(true);

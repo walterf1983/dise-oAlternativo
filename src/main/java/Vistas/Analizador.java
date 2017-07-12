@@ -25,7 +25,7 @@ public class Analizador {
 			e.printStackTrace();
 		}
 		
-		VentanaWBuilder ventanaW = new VentanaWBuilder();
+		VentanaPrincipal1 ventanaW = new VentanaPrincipal1();
 		
 		try {
 			Thread.sleep(5000);
