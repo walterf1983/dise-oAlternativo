@@ -265,7 +265,6 @@ public class PantallaCuentas extends JFrame {
 			DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
 			String empresa =(String)comboEmpresa.getSelectedItem();
 			for(int i:dao.getAniosPorEmpresa(empresa)){	
-				System.out.println(i);
 				comboAnio.addItem(Integer.toString(i));
 			}
 			label1.setText("Ya puedes elegir año y tipo periodo");

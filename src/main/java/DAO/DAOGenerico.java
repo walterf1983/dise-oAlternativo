@@ -38,7 +38,7 @@ import Objects.Item;
 		}
 		
 
-		public String fileToString() throws Exception{//VERIFICADO//VERIFICADO
+		public String fileToString() throws Exception{
 			FileReader reader=new FileReader(this.path);
 			BufferedReader buffer=new BufferedReader(reader);
 			String line;
@@ -52,7 +52,7 @@ import Objects.Item;
 			return stringSerialized;
 		}
 		
-		public void fromStringToFile(String stringSerialized) throws Exception{//VERIFICADO//VERIFICADO
+		public void fromStringToFile(String stringSerialized) throws Exception{
 			FileWriter file=new FileWriter(this.path);
 			BufferedWriter buffer = new BufferedWriter(file);
 			buffer.write(stringSerialized);
@@ -60,19 +60,19 @@ import Objects.Item;
 			file.close();
 		}
 		
-		public int addItem(Item item) throws Exception{//VERIFICADO//VERIFICADO
+		public int addItem(Item item) throws Exception{
 			ArrayList<Item>items=this.getAllItems();
 			items.add(item);
 			this.fromStringToFile(this.myGson.toJson(items));
 			return 0;
 		}
 		
-		public ArrayList<Item> getAllItems() throws Exception{//VERIFICADO//VERIFICADO
+		public ArrayList<Item> getAllItems() throws Exception{
 			return this.myGson.fromJson(this.fileToString(), this.type);
 		
 		}
 		
-		public boolean deleteItem(String name) throws Exception{//VERIFICADO//VERIFICADO
+		public boolean deleteItem(String name) throws Exception{
 			ArrayList<? extends Item>items=getAllItems();
 			int sizeFile=items.size();
 			List <? extends Item> itemsResult = items
@@ -84,7 +84,7 @@ import Objects.Item;
 			return sizeFile!=itemsResult.size();
 		}
 
-		public boolean updateItem(String name,Item itemNew) throws Exception{//VERIFICADO//VERIFICADO
+		public boolean updateItem(String name,Item itemNew) throws Exception{
 			if(deleteItem(name)){
 				this.addItem(itemNew);
 				return true;
