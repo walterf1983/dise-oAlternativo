@@ -50,6 +50,13 @@ public class VentanaOpcion extends JFrame {
 		}});
 		
 		JButton btnCargaindicadores = new JButton("CargaIndicadores");
+		btnCargaindicadores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				@SuppressWarnings("unused")
+				PantallaIndicadores pantalla=new PantallaIndicadores(wind,cuentasGlobales);
+				wind.setVisible(false);
+			}
+		});
 		btnCargaindicadores.setFont(new Font("Times New Roman", Font.BOLD, 11));
 		btnCargaindicadores.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnCargaindicadores.setBounds(251, 37, 105, 23);

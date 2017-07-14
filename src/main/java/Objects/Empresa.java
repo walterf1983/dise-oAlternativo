@@ -2,9 +2,12 @@ package Objects;
 import java.io.Serializable;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import DAO.DAOEmpresa;
 
 @SuppressWarnings("serial")
 public class Empresa extends Item implements Serializable{
@@ -23,9 +26,9 @@ public class Empresa extends Item implements Serializable{
 	private String nombreEmpresa;
 	private ArrayList<Periodo> periodos;
 	
-	public Empresa(int id, String nombreEmpresa, ArrayList<Periodo> periodos) {
+	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodos,DAOEmpresa dao) {
 		super();
-		this.id = id;
+		this.id=dao.buscarIDEmpresa(nombreEmpresa);
 		this.nombreEmpresa = nombreEmpresa;
 		this.periodos = periodos;
 	}

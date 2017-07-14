@@ -1,24 +1,27 @@
 package Objects;
 
-	public class Cuenta {
+import DAO.DAOEmpresa;
+
+public class Cuenta {
+		
 		private int idCuenta;
 		private String nombre;
 		private double valor;
 		
-		public Cuenta(int idCuenta, String nombre, double valor) {
+		public Cuenta(String nombre, double valor,DAOEmpresa dao) {
 			super();
-			this.idCuenta = idCuenta;
+			this.idCuenta =dao.buscarIDCuenta(nombre);
 			this.nombre = nombre;
 			this.valor = valor;
 		}
 		
 
-		public int getIdCuenta() {
+		public int getId() {
 			return idCuenta;
 		}
 
 
-		public void setIdCuenta(int idCuenta) {
+		public void setId(int idCuenta) {
 			this.idCuenta = idCuenta;
 		}
 
@@ -40,7 +43,7 @@ package Objects;
 			this.valor = valor;
 		}
 		public void actualizate(int idCuenta, String nombre, double valor){
-			this.setIdCuenta(idCuenta);
+			this.setId(idCuenta);
 			this.setNombre(nombre);
 			this.setValor(valor);
 		}
@@ -49,6 +52,8 @@ package Objects;
 		public boolean esCuenta(Cuenta cuenta) {
 			return this.getName().equalsIgnoreCase(cuenta.getName());
 		}
+
+
 	}
 
 

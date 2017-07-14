@@ -60,11 +60,11 @@ import Objects.Item;
 			file.close();
 		}
 		
-		public boolean addItem(Item item) throws Exception{//VERIFICADO//VERIFICADO
+		public int addItem(Item item) throws Exception{//VERIFICADO//VERIFICADO
 			ArrayList<Item>items=this.getAllItems();
 			items.add(item);
 			this.fromStringToFile(this.myGson.toJson(items));
-			return false;
+			return 0;
 		}
 		
 		public ArrayList<Item> getAllItems() throws Exception{//VERIFICADO//VERIFICADO
@@ -85,7 +85,11 @@ import Objects.Item;
 		}
 
 		public boolean updateItem(String name,Item itemNew) throws Exception{//VERIFICADO//VERIFICADO
-			return this.deleteItem(name)?this.addItem(itemNew):false;
+			if(deleteItem(name)){
+				this.addItem(itemNew);
+				return true;
+			}
+			return false;
 		}
 		
 	}

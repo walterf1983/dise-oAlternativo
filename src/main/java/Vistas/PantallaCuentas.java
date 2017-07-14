@@ -22,6 +22,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import DAO.DAOEmpresa;
 import Objects.Cuenta;
 import Objects.Empresa;
 import Repositorios.RepositorioDeEmpresas;
@@ -256,16 +258,16 @@ public class PantallaCuentas extends JFrame {
 	}
 
 	private void loadEventComboEmpresa(RepositorioDeEmpresas empresasR,JLabel label1,JLabel label2,JLabel label3,JFrame ventana){
-		
 	comboEmpresa.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			comboAnio.removeAllItems();
 			comboTipo.removeAllItems();
-			
+			DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
 			String empresa =(String)comboEmpresa.getSelectedItem();
-			for(int i:empresasR.getAniosPorEmpresa(empresa))	
+			for(int i:dao.getAniosPorEmpresa(empresa)){	
+				System.out.println(i);
 				comboAnio.addItem(Integer.toString(i));
-				
+			}
 			label1.setText("Ya puedes elegir año y tipo periodo");
 		
 			if(!label3.isVisible()){
@@ -283,7 +285,8 @@ public class PantallaCuentas extends JFrame {
 	
 private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 		comboAnio.addActionListener(new ActionListener() {
-			
+		DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
+		
 		public void actionPerformed(ActionEvent e) {
 				
 			comboTipo.removeAllItems();
@@ -293,7 +296,7 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 			int anioN=Integer.parseInt(anioS);
 			String empresa=(String)comboEmpresa.getSelectedItem();
 				
-			for(String i:empresasR.getTipoPeriodoPorEmpresa(empresa,anioN))
+			for(String i:dao.getTipoPeriodoPorEmpresa(empresa,anioN))
 				comboTipo.addItem(i);
 				
 			PantallaCuentas p =(PantallaCuentas)ventana;
@@ -304,6 +307,7 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 }
 	
 	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
+		DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -324,14 +328,15 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 	
 		DefaultTableModel m =(DefaultTableModel) table.getModel();
 	
-		for(Cuenta c:empresasR.getCuentasPor(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
-			Object[]row={c.getIdCuenta(),c.getName(),new Double(c.getValor()),new Boolean(false)};
+		for(Cuenta c:dao.getCuentasPor(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
+			Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
 			m.addRow(row);
 		}
 }
 
 	private void loadGlobalCuentas(){
 		DefaultTableModel m=(DefaultTableModel) table.getModel();
+		DAOEmpresa dao=(DAOEmpresa)repo.getDao();
 		for(int i=0;i<m.getRowCount();i++){
 			if((boolean)m.getValueAt(i, 3)){
 				int c=i;
@@ -340,7 +345,7 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 					filter(e->e.getName().equalsIgnoreCase((String)m.getValueAt(c,1))).
 					findFirst().
 					isPresent())
-				cuentasGlobales.add(new Cuenta(new Integer((int) m.getValueAt(i,0)),(String) m.getValueAt(i,1),(Double) m.getValueAt(i,2)));
+				cuentasGlobales.add(new Cuenta((String) m.getValueAt(i,1),(Double) m.getValueAt(i,2),dao));
 			}
 		}	
 	}

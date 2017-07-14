@@ -20,6 +20,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import DAO.DAOEmpresa;
 import Objects.Cuenta;
 import Repositorios.RepositorioDeEmpresas;
 
@@ -318,11 +320,13 @@ public class PantallaCargarCuentas extends JFrame {
 
 	private void agregarCuentaGlobalATabla(DefaultTableModel m) {
 		//en caso ue no esta decrementar el contador de id de cuenta -- falta
-		
+		DAOEmpresa dao=(DAOEmpresa)repo.getDao();
 		if(!this.estaCuentaGlobalEn(inCuenta.getText(),m)){
-			Object[]row={new Integer(10),new String(inCuenta.getText()),new Double(inValor.getText()),new Boolean(false)};
+			Cuenta cuenta =new Cuenta(inCuenta.getText(),Double.parseDouble(inValor.getText()),dao);
+			cuentasGlobales.add(cuenta);
+			Object[]row={new Integer(cuenta.getId()),new String(inCuenta.getText()),new Double(inValor.getText()),new Boolean(false)};
 			m.addRow(row);
-			cuentasGlobales.add(new Cuenta((int)row[0],(String)row[1],(double)row[2]));
+			
 		}else
 			JOptionPane.showMessageDialog(null,"La cuenta global ya está cargada.","Información",JOptionPane.INFORMATION_MESSAGE);
 	
@@ -389,7 +393,7 @@ public class PantallaCargarCuentas extends JFrame {
 		DefaultTableModel m =(DefaultTableModel) table.getModel();
 	
 		for(Cuenta c:cuentasGlobales){
-			Object[]row={c.getIdCuenta(),c.getName(),new Double(c.getValor()),new Boolean(false)};
+			Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
 			m.addRow(row);
 		}
 	}

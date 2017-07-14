@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+
+import DAO.DAOEmpresa;
+
 import javax.swing.border.BevelBorder;
 import Repositorios.RepositorioDeEmpresas;
 
@@ -198,40 +201,56 @@ public class PantallaAgregarCuenta extends JFrame {
 		
 		botonAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				if(comprobarIngresosDeUsuario()==-1){
 					return;
 				}
-				try {
-					PantallaCuentas win=(PantallaCuentas)fatherWindow;
-					int indexE=win.getComboEmpresa().getSelectedIndex();
-					int indexA=win.getComboAnio().getSelectedIndex();
-					int indexT=win.getComboTipo().getSelectedIndex();
-					
-					int agregado=repoEmpresa.addCuenta(inEmpresa.getText(),inAnio.getText(),(String)comboPeriodo.getSelectedItem(),inCuenta.getText(),inValor.getText());
-					if(agregado==0){
-						JOptionPane.showMessageDialog(null,"Cuenta existente agregada.","Información" ,JOptionPane.INFORMATION_MESSAGE);
-					}else
-						if(agregado==1)
-							JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa nueva.","Información" ,JOptionPane.INFORMATION_MESSAGE);
-						else 
-							if(agregado==2)
-								JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente sin el periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
-							else 
-								if(agregado==3)
-									JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente con existencia de periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
-					win.getComboEmpresa().setSelectedIndex(indexE);
-					win.getComboAnio().setSelectedIndex(indexA);
-					win.getComboTipo().setSelectedIndex(indexT);
 				
-				}catch(Exception e){
-							PantallaCuentas win=(PantallaCuentas)fatherWindow;
-							win.getComboEmpresa().insertItemAt(inEmpresa.getText(),win.getComboEmpresa().getItemCount());
-							JOptionPane.showMessageDialog(null,"Empresa nueva con cuenta agregada.", "Información",JOptionPane.INFORMATION_MESSAGE);
-							e.printStackTrace();
-						}
+				int indexE=0;
+				int indexA=0;
+				int indexT=0;
+				JComboBox comboE;
+				JComboBox comboA;
+				JComboBox comboT;
+				
+				if(fatherWindow.getClass().getName().equalsIgnoreCase("vistas.PantallaCuentas")){
+					PantallaCuentas win=(PantallaCuentas)fatherWindow;
+					comboE=win.getComboEmpresa();
+					indexE=comboE.getSelectedIndex();
+					comboA=win.getComboAnio();
+					indexA=comboA.getSelectedIndex();
+					comboT=win.getComboTipo();
+					indexT=comboT.getSelectedIndex();
+				}else{
+					PantallaCargarCuentas win=(PantallaCargarCuentas)fatherWindow;
+					comboE=win.getFather().getComboEmpresa();
+					indexE=comboE.getSelectedIndex();
+					comboA=win.getFather().getComboAnio();
+					indexA=comboA.getSelectedIndex();
+					comboT=win.getFather().getComboTipo();
+					indexT=comboT.getSelectedIndex();
 					}
-				});
+				DAOEmpresa dao=(DAOEmpresa)repoEmpresa.getDao();
+				indexE=comboE.getSelectedIndex();
+				indexA=comboA.getSelectedIndex();
+				indexT=comboT.getSelectedIndex();
+				int agregado=dao.addCuenta(inEmpresa.getText(),inAnio.getText(),(String)comboPeriodo.getSelectedItem(),inCuenta.getText(),inValor.getText());
+				if(agregado==0)
+					JOptionPane.showMessageDialog(null,"Cuenta existente agregada.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+				else
+					if(agregado==1){
+						JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa nueva.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+						comboE.insertItemAt(inEmpresa.getText(),comboE.getItemCount());
+					}
+					else 
+						if(agregado==2)
+							JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente sin el periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+						else 
+							if(agregado==3)
+								JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente con existencia de periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+				comboE.setSelectedIndex(indexE);
+				comboA.setSelectedIndex(indexA);
+				comboT.setSelectedIndex(indexT);
+				}});
 		
 		if(fatherWindow.getClass().getName().equalsIgnoreCase("vistas.PantallaCargarCuentas")){
 			PantallaCargarCuentas pantalla = (PantallaCargarCuentas)fatherWindow;
@@ -245,7 +264,7 @@ public class PantallaAgregarCuenta extends JFrame {
 			this.comboPeriodo.setSelectedItem(pantalla.getComboTipo().getSelectedItem());
 			this.comboPeriodo.setEnabled(false);
 		}
-		}
+	}
 	
 		private boolean asegurarIngresoTextoUsuario(String caracteresValidos,String ingreso){
 			for(int i=0;i<ingreso.length();i++){

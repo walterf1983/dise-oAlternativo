@@ -14,10 +14,14 @@ abstract public class RepositorioGenerico {
 		this.dao = dao;
 	}
 	
-	public boolean add(Item item) throws Exception{
+	public int add(Item item) throws Exception{
 		return this.dao.addItem(item);
 		}
 	
+	public DAOInterfaz getDao() {
+		return dao;
+	}
+
 	public boolean delete(String item) throws Exception{
 		return this.dao.deleteItem(item);
 	}

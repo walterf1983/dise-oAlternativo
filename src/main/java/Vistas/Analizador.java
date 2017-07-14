@@ -2,7 +2,9 @@ package Vistas;
 
 import java.util.ArrayList;
 
+import DAO.DAOEmpresa;
 import Objects.Cuenta;
+import Repositorios.RepositorioDeEmpresas;
 
 public class Analizador {
    
@@ -11,6 +13,9 @@ public class Analizador {
 	public static void main(String[] args) {
 		
 		PantallaAgregarCuenta.setCountInstance(0);
+		DAOEmpresa.setupINDEX("Empresas.json");
+		System.out.println(DAOEmpresa.getIDEmpresa()+" "+DAOEmpresa.getIDPeriodo()+" "+DAOEmpresa.getIDCuenta());
+		
 		VentanaPrincipal ventanaP = new VentanaPrincipal();
 		try {
 			Thread.sleep(7000);

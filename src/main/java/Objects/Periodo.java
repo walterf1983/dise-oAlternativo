@@ -1,22 +1,14 @@
 package Objects;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
+import DAO.DAOEmpresa;
+
 	public class Periodo {
-	
-	private static int ID;
-	
-	public static int getID() {
-		return ID;
-	}
-
-	public static void setID(int iD) {
-		ID = iD;
-	}
-
 	
 	private int id;
 	private int anio;
@@ -24,17 +16,9 @@ import javax.swing.JOptionPane;
 	private ArrayList<Cuenta> cuentas;
 
 	
-	public Periodo(int id, int anio, String tipo) {
+	public Periodo(int anio, String tipo,ArrayList<Cuenta>cuentas,DAOEmpresa dao) {
 		super();
-		this.id = id;
-		this.anio = anio;
-		this.tipo = tipo;
-		this.cuentas = new ArrayList<Cuenta>();
-	}
-	
-	public Periodo(int id, int anio, String tipo,ArrayList<Cuenta>cuentas) {
-		super();
-		this.id = id;
+		this.id=dao.buscarIDPeriodo(anio, tipo);
 		this.anio = anio;
 		this.tipo = tipo;
 		this.cuentas = cuentas;
