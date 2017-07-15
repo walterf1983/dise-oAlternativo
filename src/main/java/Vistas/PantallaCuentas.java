@@ -42,45 +42,6 @@ import javax.swing.JTextPane;
 @SuppressWarnings("serial")
 public class PantallaCuentas extends JFrame {
 
-	private JPanel contentPane;
-	private JTable table;
-	private JComboBox<String> comboEmpresa;
-	private JComboBox<String> comboAnio;
-	private JComboBox<String> comboTipo;
-	private RepositorioDeEmpresas repo;
-	private JButton botonAgregar;
-	private JButton botonCargar;
-	private JButton botonVolver;
-	ArrayList<Cuenta> cuentasGlobales;
-	
-	public JButton getBotonAgregar() {
-		return botonAgregar;
-	}
-
-	public JButton getBotonCargar() {
-		return botonCargar;
-	}
-
-	public JButton getBotonVolver() {
-		return botonVolver;
-	}
-
-	public JComboBox<String> getComboAnio() {
-		return comboAnio;
-	}
-
-	public JComboBox<String> getComboTipo() {
-		return comboTipo;
-	}
-
-	public JComboBox<String> getComboEmpresa() {
-		return comboEmpresa;
-	}
-
-	public RepositorioDeEmpresas getRepo() {
-		return repo;
-	}
-
 	public PantallaCuentas(JFrame fatherWindow, ArrayList<Cuenta> cuentasGlobales) {
 		
 		setUndecorated(true);
@@ -95,7 +56,7 @@ public class PantallaCuentas extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(-3, 280, 450, 321);
 		setLocationRelativeTo(null);
-
+	
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(220, 220, 220));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -146,7 +107,7 @@ public class PantallaCuentas extends JFrame {
 		table.setFont(new Font("Consolas",Font.BOLD,14));
 		scrollPane.setViewportView(table);
 		
-
+	
 	
 		
 		this.loadEmpresasCombo(comboEmpresa,repoEmpresa);
@@ -236,6 +197,45 @@ public class PantallaCuentas extends JFrame {
 		
 	}
 
+	private JPanel contentPane;
+	private JTable table;
+	private JComboBox<String> comboEmpresa;
+	private JComboBox<String> comboAnio;
+	private JComboBox<String> comboTipo;
+	private RepositorioDeEmpresas repo;
+	private JButton botonAgregar;
+	private JButton botonCargar;
+	private JButton botonVolver;
+	ArrayList<Cuenta> cuentasGlobales;
+	
+	public JButton getBotonAgregar() {
+		return botonAgregar;
+	}
+
+	public JButton getBotonCargar() {
+		return botonCargar;
+	}
+
+	public JButton getBotonVolver() {
+		return botonVolver;
+	}
+
+	public JComboBox<String> getComboAnio() {
+		return comboAnio;
+	}
+
+	public JComboBox<String> getComboTipo() {
+		return comboTipo;
+	}
+
+	public JComboBox<String> getComboEmpresa() {
+		return comboEmpresa;
+	}
+
+	public RepositorioDeEmpresas getRepo() {
+		return repo;
+	}
+
 	public void loadEventComboTipo(RepositorioDeEmpresas repoEmpresa, JFrame ventana) {
 		comboTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -292,14 +292,14 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 			if(comboAnio.getItemAt(0)!=null){
 				String anioS=(String)comboAnio.getSelectedItem();
 			
-			int anioN=Integer.parseInt(anioS);
-			String empresa=(String)comboEmpresa.getSelectedItem();
+				int anioN=Integer.parseInt(anioS);
+				String empresa=(String)comboEmpresa.getSelectedItem();
 				
-			for(String i:dao.getTipoPeriodoPorEmpresa(empresa,anioN))
+				for(String i:dao.getTipoPeriodoPorEmpresa(empresa,anioN))
 				comboTipo.addItem(i);
 				
-			PantallaCuentas p =(PantallaCuentas)ventana;
-			p.loadTableByEvent(empresasR);	
+				PantallaCuentas p =(PantallaCuentas)ventana;
+				p.loadTableByEvent(empresasR);	
 			}
 		}
 	});

@@ -126,7 +126,7 @@ import Objects.Periodo;
 			return esta;
 		}
 
-		private  Empresa buscarEmpresa(String empresa){
+		protected  Empresa buscarEmpresa(String empresa){
 			return this.getAllEmpresas().
 					stream().
 					filter(e->e.getName().
@@ -136,7 +136,7 @@ import Objects.Periodo;
 		
 		}
 
-		private Periodo buscarPeriodo(int anio, String tipo){
+		protected Periodo buscarPeriodo(int anio, String tipo){
 			ArrayList<Periodo> periodos=new ArrayList<Periodo>();
 			for(ArrayList<Periodo>p:this.getAllEmpresas().
 					stream().

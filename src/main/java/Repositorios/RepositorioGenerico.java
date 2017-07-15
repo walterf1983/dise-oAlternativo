@@ -9,6 +9,10 @@ abstract public class RepositorioGenerico {
 	
 	protected DAOInterfaz dao; 
 
+	public void setDao(DAOInterfaz dao) {
+		this.dao = dao;
+	}
+
 	public RepositorioGenerico(DAOInterfaz dao) {
 		super();
 		this.dao = dao;

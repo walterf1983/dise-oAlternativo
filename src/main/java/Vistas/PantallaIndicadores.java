@@ -3,10 +3,6 @@ package Vistas;
 
 
 import javax.swing.JFrame;
-
-
-
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -24,8 +20,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.DAOEmpresa;
+import DAO.DAOIndicador;
 import Objects.Cuenta;
 import Objects.Empresa;
+import Objects.Indicador;
 import Repositorios.RepositorioDeEmpresas;
 
 
@@ -38,49 +36,9 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JTextPane;
-import javax.swing.JTabbedPane;
 
 @SuppressWarnings("serial")
 public class PantallaIndicadores extends JFrame {
-
-	private JPanel contentPane;
-	private JTable table;
-	private JComboBox<String> comboEmpresa;
-	private JComboBox<String> comboAnio;
-	private JComboBox<String> comboTipo;
-	private RepositorioDeEmpresas repo;
-	private JButton botonAgregar;
-	private JButton botonCargar;
-	private JButton botonVolver;
-	ArrayList<Cuenta> cuentasGlobales;
-	
-	public JButton getBotonAgregar() {
-		return botonAgregar;
-	}
-
-	public JButton getBotonCargar() {
-		return botonCargar;
-	}
-
-	public JButton getBotonVolver() {
-		return botonVolver;
-	}
-
-	public JComboBox<String> getComboAnio() {
-		return comboAnio;
-	}
-
-	public JComboBox<String> getComboTipo() {
-		return comboTipo;
-	}
-
-	public JComboBox<String> getComboEmpresa() {
-		return comboEmpresa;
-	}
-
-	public RepositorioDeEmpresas getRepo() {
-		return repo;
-	}
 
 	public PantallaIndicadores(JFrame fatherWindow, ArrayList<Cuenta> cuentasGlobales) {
 		
@@ -96,7 +54,7 @@ public class PantallaIndicadores extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(-3, 280, 589, 438);
 		setLocationRelativeTo(null);
-
+	
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(220, 220, 220));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -140,7 +98,7 @@ public class PantallaIndicadores extends JFrame {
 		txtpnSaddaAssdaAds.setOpaque(false);
 		txtpnSaddaAssdaAds.setFont(new Font("Times New Roman", Font.ITALIC, 12));
 		txtpnSaddaAssdaAds.setText("Muestra la tabla de indicadores globales del sistema.\r\nTilde los indicadores de la tabla ue desee cargar al sistema.");
-		txtpnSaddaAssdaAds.setBounds(101, 357, 308, 25);
+		txtpnSaddaAssdaAds.setBounds(106, 359, 308, 25);
 		contentPane.add(txtpnSaddaAssdaAds);
 		
 		
@@ -164,17 +122,17 @@ public class PantallaIndicadores extends JFrame {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 123, 544, 223);
+		scrollPane.setBounds(22, 123, 544, 228);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		table.setSize(new Dimension(0, 0));
 		table.setGridColor(new Color(128, 0, 0));
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 100, 0), new Color(0, 0, 0), new Color(255, 0, 0), new Color(0, 0, 0)));
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 255), new Color(0, 191, 255), new Color(0, 0, 255), new Color(64, 224, 208)));
 		table.setFont(new Font("Consolas",Font.BOLD,14));
 		scrollPane.setViewportView(table);
 		
-
+	
 	
 		
 		this.loadEmpresasCombo(comboEmpresa,repoEmpresa);
@@ -219,7 +177,7 @@ public class PantallaIndicadores extends JFrame {
 		lblElijaUnaEmpresa.setBackground(new Color(255, 255, 255));
 		lblElijaUnaEmpresa.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblElijaUnaEmpresa.setVerticalAlignment(SwingConstants.TOP);
-		lblElijaUnaEmpresa.setBounds(10, 11, 569, 416);
+		lblElijaUnaEmpresa.setBounds(10, 11, 569, 90);
 		contentPane.add(lblElijaUnaEmpresa);
 			
 		this.loadEventComboTipo(repoEmpresa,this);
@@ -231,16 +189,103 @@ public class PantallaIndicadores extends JFrame {
 		label.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		label.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 255), new Color(102, 205, 170), new Color(0, 0, 205), new Color(72, 209, 204)), "", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(128, 0, 0)));
 		label.setBackground(Color.WHITE);
-		label.setBounds(10, 108, 569, 319);
+		label.setBounds(10, 112, 569, 315);
 		contentPane.add(label);
 		
 	}
 
-	public void loadEventComboTipo(RepositorioDeEmpresas repoEmpresa, JFrame ventana) {
+	private ArrayList<Cuenta> cuentasGlobales;
+	private JPanel contentPane;
+	private JTable table;
+	private JComboBox<String> comboEmpresa;
+	private JComboBox<String> comboAnio;
+	private JComboBox<String> comboTipo;
+	private RepositorioDeEmpresas repo;
+	private JButton botonAgregar;
+	private JButton botonCargar;
+	private JButton botonVolver;
+	public JButton getBotonAgregar() {
+		return botonAgregar;
+	}
+
+	public JButton getBotonCargar() {
+		return botonCargar;
+	}
+
+	public JButton getBotonVolver() {
+		return botonVolver;
+	}
+
+	public JComboBox<String> getComboAnio() {
+		return comboAnio;
+	}
+
+	public JComboBox<String> getComboTipo() {
+		return comboTipo;
+	}
+
+	public JComboBox<String> getComboEmpresa() {
+		return comboEmpresa;
+	}
+
+	public RepositorioDeEmpresas getRepo() {
+		return repo;
+	}
+
+	private void loadEventComboEmpresa(RepositorioDeEmpresas empresasR,JLabel label1,JLabel label2,JLabel label3,JFrame ventana){
+		comboEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboAnio.removeAllItems();
+				comboTipo.removeAllItems();
+				empresasR.setDao(new DAOIndicador("EmpresasGenerica.json"));
+				DAOIndicador dao=(DAOIndicador)empresasR.getDao();
+				String empresa =(String)comboEmpresa.getSelectedItem();
+				for(int i:dao.getAniosPorEmpresa(empresa)){	
+					comboAnio.addItem(Integer.toString(i));
+				}
+				label1.setText("Ya puedes elegir año y tipo periodo");
+			
+				if(!label3.isVisible()){
+					label2 .setVisible(true);
+					label3.setVisible(true);
+					comboAnio.setVisible(true);
+					comboTipo.setVisible(true);
+				}
+				PantallaIndicadores p =(PantallaIndicadores)ventana;
+				p.loadTableByEvent(empresasR);
+					
+			}
+		});
+	}
+
+	private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
+			comboAnio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				empresasR.setDao(new DAOIndicador("EmpresasGenerica.json"));
+				DAOIndicador dao=(DAOIndicador)empresasR.getDao();
+				
+				String empresa=(String) comboEmpresa.getSelectedItem();
+				comboTipo.removeAllItems();
+				
+				if(comboAnio.getItemAt(0)!=null){
+					String anioS=(String)comboAnio.getSelectedItem();
+				
+				int anioN=Integer.parseInt(anioS);
+				
+				for(String i:dao.getTipoPeriodoPorEmpresa(empresa,anioN)){
+					comboTipo.addItem(i);
+				}
+				PantallaIndicadores p =(PantallaIndicadores)ventana;
+				p.loadTableByEvent(empresasR);	
+				}
+			}
+		});
+	}
+
+	private void loadEventComboTipo(RepositorioDeEmpresas repoEmpresa, JFrame ventana) {
 		comboTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(comboAnio.getSelectedItem()!=null){
+				if(comboTipo.getSelectedItem()!=null){
 					PantallaIndicadores p =(PantallaIndicadores)ventana;
 					p.loadTableByEvent(repoEmpresa);
 				}
@@ -257,56 +302,8 @@ public class PantallaIndicadores extends JFrame {
 			comboBoxEmpresa.insertItemAt(e.getName(), comboBoxEmpresa.getItemCount());
 	}
 
-	private void loadEventComboEmpresa(RepositorioDeEmpresas empresasR,JLabel label1,JLabel label2,JLabel label3,JFrame ventana){
-	comboEmpresa.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			comboAnio.removeAllItems();
-			comboTipo.removeAllItems();
-			DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
-			String empresa =(String)comboEmpresa.getSelectedItem();
-			for(int i:dao.getAniosPorEmpresa(empresa)){	
-				comboAnio.addItem(Integer.toString(i));
-			}
-			label1.setText("Ya puedes elegir año y tipo periodo");
-		
-			if(!label3.isVisible()){
-				label2 .setVisible(true);
-				label3.setVisible(true);
-				comboAnio.setVisible(true);
-				comboTipo.setVisible(true);
-			}
-			PantallaIndicadores p =(PantallaIndicadores)ventana;
-			p.loadTableByEvent(empresasR);
-				
-		}
-	});
-}
-	
-private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
-		comboAnio.addActionListener(new ActionListener() {
-		DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
-		
-		public void actionPerformed(ActionEvent e) {
-				
-			comboTipo.removeAllItems();
-			if(comboAnio.getItemAt(0)!=null){
-				String anioS=(String)comboAnio.getSelectedItem();
-			
-			int anioN=Integer.parseInt(anioS);
-			String empresa=(String)comboEmpresa.getSelectedItem();
-				
-			for(String i:dao.getTipoPeriodoPorEmpresa(empresa,anioN))
-				comboTipo.addItem(i);
-				
-			PantallaIndicadores p =(PantallaIndicadores)ventana;
-			p.loadTableByEvent(empresasR);	
-			}
-		}
-	});
-}
-	
 	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
-		DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
+		DAOIndicador dao=(DAOIndicador)empresasR.getDao();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -324,11 +321,11 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 		});
 
 		String empresa=(String)comboEmpresa.getSelectedItem();
-	
 		DefaultTableModel m =(DefaultTableModel) table.getModel();
 	
-		for(Cuenta c:dao.getCuentasPor(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
-			Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
+		//falta defenir el tipo y si va o no check
+		for(Indicador c:dao.getIndicadoresNoRepetidosPorEmpresa(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
+			Object[]row={c.getId(),c.getName(),new String(c.getFormula()),new Double(24),new String(c.getClass().getSimpleName()),new Boolean(false)};
 			m.addRow(row);
 		}
 }
