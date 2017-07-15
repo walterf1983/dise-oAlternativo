@@ -15,7 +15,8 @@ public class Analizador {
 	public static ArrayList<Cuenta>cuentasGlobales=new ArrayList<Cuenta>();
 	public static ArrayList<Cuenta>indicadoresGlobales=new ArrayList<Cuenta>();
     public static int count;	
-    private static ServerSocket SERVER_SOCKET;
+    @SuppressWarnings("unused")
+	private static ServerSocket SERVER_SOCKET;
 	
     public static void main(String[] args) {
 	

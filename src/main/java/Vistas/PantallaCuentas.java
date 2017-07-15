@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.JComboBox;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -22,6 +24,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import DAO.DAOEmpresa;
 import Objects.Cuenta;
@@ -100,7 +103,20 @@ public class PantallaCuentas extends JFrame {
 		scrollPane.setBounds(29, 123, 385, 108);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable(){
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer,int rowIndex,int columnIndex) {
+				Component d=super.prepareRenderer(renderer, rowIndex, columnIndex);
+				
+	        if(columnIndex ==3){
+	        	
+	        	d.setBackground(Color.red);
+	        }
+	        
+	      
+	      return d;
+	    }
+		};
 		table.setSize(new Dimension(0, 0));
 		table.setGridColor(new Color(128, 0, 0));
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 100, 0), new Color(0, 0, 0), new Color(255, 0, 0), new Color(0, 0, 0)));

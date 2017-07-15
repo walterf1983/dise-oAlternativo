@@ -11,7 +11,7 @@
           {
             "id": 12,
             "formula": "ganancia*2",
-            "name": "ganancia",
+            "name": "indicador1",
             "cuentasName": [
               "facturacion",
               "perdida"
@@ -22,7 +22,7 @@
           {
             "id": 1,
             "formula": "facturacion-perdida",
-            "name": "ganancia",
+            "name": "indicador2",
             "cuentasName": [
               "facturacion",
               "perdida"
@@ -69,7 +69,7 @@
           {
             "id": 12,
             "formula": "facturacion",
-            "name": "ganancia",
+            "name": "indicador3",
             "cuentasName": [
               "facturacion",
               "perdida"
@@ -80,7 +80,7 @@
           {
             "id": 1,
             "formula": "facturacion-perdida",
-            "name": "ganancia",
+            "name": "indicador2",
             "cuentasName": [
               "facturacion",
               "perdida"
@@ -116,7 +116,7 @@
           {
             "id": 1,
             "formula": "facturacion-perdida",
-            "name": "ganancia",
+            "name": "indicador2",
             "cuentasName": [
               "facturacion",
               "perdida"
