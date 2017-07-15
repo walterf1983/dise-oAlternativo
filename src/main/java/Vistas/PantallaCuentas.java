@@ -314,6 +314,14 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 				"Id", "Nombre", "Valor", "Check"
 			}
 			) {
+			
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				if(column<3)
+					return false;
+				return true;
+			}
+			
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
 				Integer.class, String.class, Double.class, Boolean.class

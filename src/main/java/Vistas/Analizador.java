@@ -14,16 +14,17 @@ public class Analizador {
    
 	public static ArrayList<Cuenta>cuentasGlobales=new ArrayList<Cuenta>();
 	public static ArrayList<Cuenta>indicadoresGlobales=new ArrayList<Cuenta>();
-    public static int count;
-	public static void main(String[] args) {
+    public static int count;	
+    private static ServerSocket SERVER_SOCKET;
+	
+    public static void main(String[] args) {
+	
 		
 		try {//PARA UE NO HAYA MAS DE UNA APLICACION ABIERTA
-				@SuppressWarnings({ "unused", "resource" })
-				ServerSocket SERVER_SOCKET=	new ServerSocket(1334);;
-			} catch (IOException x) {
-				JOptionPane.showMessageDialog(null,"Otra instancia de la aplicación\n está ejecutandose.","AVISO",JOptionPane.ERROR_MESSAGE);
-				System.exit(0);
-			 
+			SERVER_SOCKET=new ServerSocket(1334);
+		} catch (IOException x) {
+			JOptionPane.showMessageDialog(null,"Otra instancia de la aplicación\n está ejecutandose.","AVISO",JOptionPane.ERROR_MESSAGE);
+			System.exit(1);
 			}
 		
 		PantallaAgregarCuenta.setCountInstance(0);

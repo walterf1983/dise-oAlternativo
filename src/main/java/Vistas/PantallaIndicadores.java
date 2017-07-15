@@ -13,6 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
@@ -24,6 +29,7 @@ import DAO.DAOIndicador;
 import Objects.Cuenta;
 import Objects.Empresa;
 import Objects.Indicador;
+import Objects.Periodo;
 import Repositorios.RepositorioDeEmpresas;
 
 
@@ -36,6 +42,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JTextPane;
+import javax.swing.DropMode;
 
 @SuppressWarnings("serial")
 public class PantallaIndicadores extends JFrame {
@@ -126,13 +133,12 @@ public class PantallaIndicadores extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.setDropMode(DropMode.INSERT);
 		table.setSize(new Dimension(0, 0));
 		table.setGridColor(new Color(128, 0, 0));
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 255), new Color(0, 191, 255), new Color(0, 0, 255), new Color(64, 224, 208)));
 		table.setFont(new Font("Consolas",Font.BOLD,14));
 		scrollPane.setViewportView(table);
-		
-	
 	
 		
 		this.loadEmpresasCombo(comboEmpresa,repoEmpresa);
@@ -298,33 +304,52 @@ public class PantallaIndicadores extends JFrame {
 
 	private void loadEmpresasCombo(JComboBox<String> comboBoxEmpresa, RepositorioDeEmpresas empresas){
 	
-		for(Empresa e:empresas.getAllEmpresas())
-			comboBoxEmpresa.insertItemAt(e.getName(), comboBoxEmpresa.getItemCount());
+		for(Empresa e:empresas.getAllEmpresas()){
+			for(Periodo periodo:e.getPeriodos())
+				if(!periodo.getIndicadores().isEmpty()){
+					comboBoxEmpresa.insertItemAt(e.getName(), comboBoxEmpresa.getItemCount());
+					break;
+				}
+		}
 	}
-
 	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
-		DAOIndicador dao=(DAOIndicador)empresasR.getDao();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Id", "Nombre","Formula", "Valor","Tipo", "Check"
-			}
+				new Object[][] {
+				},
+				new String[] {
+					"Id", "Nombre", "Formula", "Valor", "Tipo", "Check"
+				}
 			) {
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class,String.class, Double.class,String.class, Boolean.class
-			};
-			public Class<?> getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					if(column<5)
+						return false;
+					return true;
 			}
-		});
-
-		String empresa=(String)comboEmpresa.getSelectedItem();
-		DefaultTableModel m =(DefaultTableModel) table.getModel();
+				@SuppressWarnings("rawtypes")
+				Class[] columnTypes = new Class[] {
+					Integer.class, String.class, String.class, Double.class, String.class, Boolean.class
+				};
+				@SuppressWarnings({ "unchecked", "rawtypes" })
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+			table.getColumnModel().getColumn(0).setPreferredWidth(34);
+			table.getColumnModel().getColumn(1).setPreferredWidth(96);
+			table.getColumnModel().getColumn(2).setPreferredWidth(145);
+			table.getColumnModel().getColumn(4).setPreferredWidth(142);
+			table.getColumnModel().getColumn(5).setPreferredWidth(41);
+		DAOIndicador dao=(DAOIndicador)empresasR.getDao();
 	
+	
+		String empresaS=(String)comboEmpresa.getSelectedItem();	
+		Empresa empresa=dao.buscarEmpresa(empresaS);
+		Periodo periodo= empresa.getPeriodo(Integer.parseInt((String) comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem());
+		DefaultTableModel m =(DefaultTableModel) table.getModel();
+		
 		//falta defenir el tipo y si va o no check
-		for(Indicador c:dao.getIndicadoresNoRepetidosPorEmpresa(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
+		for(Indicador c:periodo.getIndicadores()){
 			Object[]row={c.getId(),c.getName(),new String(c.getFormula()),new Double(24),new String(c.getClass().getSimpleName()),new Boolean(false)};
 			m.addRow(row);
 		}

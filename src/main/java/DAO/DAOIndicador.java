@@ -16,10 +16,6 @@ public class DAOIndicador extends DAOEmpresa{
 
 	private static int IDIndicador;
 	
-	private static void setIDIndicador(int iDIndicador) {
-		IDIndicador = iDIndicador;
-	}
-
 	public static int getIDIndicador() {
 		return IDIndicador;
 	}
@@ -27,6 +23,10 @@ public class DAOIndicador extends DAOEmpresa{
 	public static void setupINDEX(String path){
 		DAOIndicador daoI=new DAOIndicador(path);
 		daoI.setupIndex();
+	}
+
+	private static void setIDIndicador(int iDIndicador) {
+		IDIndicador = iDIndicador;
 	}
 
 	private void setupIndexIndicador(){
@@ -74,6 +74,11 @@ public class DAOIndicador extends DAOEmpresa{
 				get();
 	}
 
+	private Periodo buscarPeriodoDeEmpresa(String nombreEmpresa, int anio, String tipo) {
+		Empresa empresa=this.buscarEmpresa(nombreEmpresa);
+		return empresa.getPeriodo(anio, tipo);
+	}
+
 	public ArrayList<Indicador> getAllIndicadores(){
 		ArrayList<Empresa> empresas=this.getAllEmpresas();
 		ArrayList<Indicador>indicadores=new ArrayList<Indicador>();
@@ -103,9 +108,37 @@ public class DAOIndicador extends DAOEmpresa{
 		return indicadoresRelleno;
 	}
 
-	private Periodo buscarPeriodoDeEmpresa(String nombreEmpresa, int anio, String tipo) {
-		Empresa empresa=this.buscarEmpresa(nombreEmpresa);
-		return empresa.getPeriodo(anio, tipo);
+	@Override
+	public ArrayList<Integer> getAniosPorEmpresa(String empresa) {
+		
+		ArrayList<Integer> anios=new ArrayList<Integer>();
+		
+		
+			for(Empresa e:this.getAllEmpresas())
+				if (e.getName().equals(empresa))
+					for(Periodo p:e.getPeriodos())
+						if(!anios.contains(p.getAnio())&&!p.getIndicadores().isEmpty())
+							anios.add(p.getAnio());
+			
+				
+			
+		return anios;
+	}
+	
+	@Override
+	public ArrayList<String> getTipoPeriodoPorEmpresa(String empresa, int anio) {
+		ArrayList<String> tipos=new ArrayList<String>();
+			for(Empresa e:this.getAllEmpresas())
+				if (e.getName().equals(empresa))
+					for(Periodo p:e.getPeriodos())
+						if(tipos.indexOf(p.getTipo())==-1)
+							if(p.getAnio()==anio)
+								if(!p.getIndicadores().isEmpty())
+									tipos.add(p.getTipo());
+		return tipos;
 	}
 	
 }
+	
+	
+	

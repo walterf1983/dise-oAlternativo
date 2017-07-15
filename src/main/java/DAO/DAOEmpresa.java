@@ -126,14 +126,16 @@ import Objects.Periodo;
 			return esta;
 		}
 
-		protected  Empresa buscarEmpresa(String empresa){
-			return this.getAllEmpresas().
-					stream().
-					filter(e->e.getName().
-					equalsIgnoreCase(empresa)).
-					findFirst().
-					get();
-		
+		private Cuenta buscarCuenta(String nombreCuenta){
+			for(Empresa e:this.getAllEmpresas()){
+				for(Periodo p:e.getPeriodos()){
+					for(Cuenta c:p.getCuentas()){
+						if(c.getName().equals(nombreCuenta))
+							return c;
+				}
+			}
+		}
+			return null;
 		}
 
 		protected Periodo buscarPeriodo(int anio, String tipo){
@@ -152,16 +154,14 @@ import Objects.Periodo;
 			return null;
 		}
 
-		private Cuenta buscarCuenta(String nombreCuenta){
-			for(Empresa e:this.getAllEmpresas()){
-				for(Periodo p:e.getPeriodos()){
-					for(Cuenta c:p.getCuentas()){
-						if(c.getName().equals(nombreCuenta))
-							return c;
-				}
-			}
-		}
-			return null;
+		public Empresa buscarEmpresa(String empresa){
+			return this.getAllEmpresas().
+					stream().
+					filter(e->e.getName().
+					equalsIgnoreCase(empresa)).
+					findFirst().
+					get();
+		
 		}
 
 		public int buscarIDEmpresa(String nombreEmpresa) {
@@ -244,8 +244,6 @@ import Objects.Periodo;
 		public ArrayList<Integer> getAniosPorEmpresa(String empresa){
 			
 			ArrayList<Integer> anios=new ArrayList<Integer>();
-			
-			
 				for(Empresa e:this.getAllEmpresas()){
 					if (e.getName().equals(empresa)){
 						for(Periodo p:e.getPeriodos()){
