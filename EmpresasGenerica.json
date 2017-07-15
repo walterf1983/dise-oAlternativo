@@ -1,0 +1,156 @@
+[
+  {
+    "id": 2,
+    "nombreEmpresa": "Twitter",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2016,
+        "tipo": "A",
+        "indicadores": [
+          {
+            "id": 12,
+            "formula": "ganancia*2",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          },
+          {
+            "id": 1,
+            "formula": "facturacion-perdida",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [
+              {
+                "id": 25,
+                "formula": "ganancia*10",
+                "name": "ganancia",
+                "cuentasName": [
+                  "facturacion",
+                  "perdida"
+                ],
+                "indicadores": [],
+                "mutable": true
+              }
+            ],
+            "mutable": false
+          }
+        ],
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 11
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 14
+          },
+          {
+            "idCuenta": 3,
+            "nombre": "neto_asociado",
+            "valor": 15
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "anio": 2015,
+        "tipo": "1S",
+        "indicadores": [
+          {
+            "id": 12,
+            "formula": "facturacion",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          },
+          {
+            "id": 1,
+            "formula": "facturacion-perdida",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          }
+        ],
+        "cuentas": [
+          {
+            "idCuenta": 3,
+            "nombre": "Valor_Neto",
+            "valor": 17
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 19
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nombreEmpresa": "Fara",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2010,
+        "tipo": "1S",
+        "indicadores": [
+          {
+            "id": 1,
+            "formula": "facturacion-perdida",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": false
+          }
+        ],
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "necesidad",
+            "valor": 78.7
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "anio": 2010,
+        "tipo": "2S",
+        "indicadores": [],
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "necesidad",
+            "valor": 56
+          },
+          {
+            "idCuenta": 5,
+            "nombre": "calculo",
+            "valor": 45
+          }
+        ]
+      }
+    ]
+  }
+]

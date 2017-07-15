@@ -1,1 +1,155 @@
-[{"id":2,"nombreEmpresa":"Twitter","periodos":[{"id":0,"anio":2016,"tipo":"A","cuentas":[{"idCuenta":1,"nombre":"FDS","valor":11.0},{"idCuenta":2,"nombre":"EBITDA","valor":14.0},{"idCuenta":3,"nombre":"neto_asociado","valor":15.0}]},{"id":0,"anio":2015,"tipo":"1S","cuentas":[{"idCuenta":3,"nombre":"Valor_Neto","valor":17.0},{"idCuenta":2,"nombre":"EBITDA","valor":19.0}]}]},{"id":7,"nombreEmpresa":"Fara","periodos":[{"id":0,"anio":2010,"tipo":"1S","cuentas":[{"idCuenta":5,"nombre":"necesidad","valor":78.7}]},{"id":6,"anio":2010,"tipo":"2S","cuentas":[{"idCuenta":5,"nombre":"necesidad","valor":56.0},{"idCuenta":5,"nombre":"calculo","valor":45.0}]}]},{"id":8,"nombreEmpresa":"Ford","periodos":[{"id":0,"anio":2010,"tipo":"1S","cuentas":[{"idCuenta":5,"nombre":"holding","valor":872.4}]},{"id":6,"anio":2010,"tipo":"2S","cuentas":[{"idCuenta":5,"nombre":"holding","valor":45.0},{"idCuenta":5,"nombre":"cashflow","valor":35.0}]}]},{"id":7,"nombreEmpresa":"Facebook","periodos":[{"id":1,"anio":2015,"tipo":"1S","cuentas":[{"idCuenta":1,"nombre":"FDS","valor":6.0},{"idCuenta":2,"nombre":"EBITDA","valor":9.0}]},{"id":0,"anio":2016,"tipo":"A","cuentas":[{"idCuenta":5,"nombre":"FDS","valor":324.0},{"idCuenta":2,"nombre":"EBITDA","valor":5.0}]}]},{"id":9,"nombreEmpresa":"Stany","periodos":[{"id":7,"anio":2019,"tipo":"1S","cuentas":[{"idCuenta":6,"nombre":"valoracion","valor":54.0}]}]},{"id":11,"nombreEmpresa":"ENTRE","periodos":[{"id":8,"anio":2313,"tipo":"1S","cuentas":[{"idCuenta":8,"nombre":"OIUS","valor":72625.0}]}]},{"id":12,"nombreEmpresa":"sdaasa","periodos":[{"id":9,"anio":1312,"tipo":"1S","cuentas":[{"idCuenta":9,"nombre":"erew","valor":121.0}]}]},{"id":13,"nombreEmpresa":"sdafafs","periodos":[{"id":10,"anio":42111,"tipo":"1S","cuentas":[{"idCuenta":10,"nombre":"gffdgss","valor":3243.0}]}]},{"id":14,"nombreEmpresa":"ron","periodos":[{"id":11,"anio":276,"tipo":"A","cuentas":[{"idCuenta":11,"nombre":"vato","valor":354.0}]}]},{"id":15,"nombreEmpresa":"Pep","periodos":[{"id":12,"anio":2008,"tipo":"1S","cuentas":[{"idCuenta":12,"nombre":"multiplicado","valor":1.0}]},{"id":13,"anio":2008,"tipo":"2S","cuentas":[{"idCuenta":13,"nombre":"div","valor":1.0}]},{"id":14,"anio":203,"tipo":"2S","cuentas":[{"idCuenta":13,"nombre":"div","valor":1.0},{"idCuenta":14,"nombre":"fort","valor":423.0},{"idCuenta":2,"nombre":"EBITDA","valor":4.0}]},{"id":15,"anio":203,"tipo":"1S","cuentas":[{"idCuenta":18,"nombre":"Uy","valor":23.0}]}]}]
+[
+  {
+    "id": 2,
+    "nombreEmpresa": "Twitter",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2016,
+        "tipo": "A",
+        "indicadores": [
+          {
+            "id": 12,
+            "formula": "ganancia*2",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          },
+          {
+            "id": 1,
+            "formula": "facturacion-perdida",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": false
+          }
+        ],
+        "cuentas": [
+          {
+            "idCuenta": 1,
+            "nombre": "FDS",
+            "valor": 11
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 14
+          },
+          {
+            "idCuenta": 3,
+            "nombre": "neto_asociado",
+            "valor": 15
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "anio": 2015,
+        "tipo": "1S",
+        "indicadores": [
+          {
+            "id": 12,
+            "formula": "facturacion",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          },
+          {
+            "id": 1,
+            "formula": "facturacion-perdida",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          }
+        ],
+        "cuentas": [
+          {
+            "idCuenta": 3,
+            "nombre": "Valor_Neto",
+            "valor": 17
+          },
+          {
+            "idCuenta": 2,
+            "nombre": "EBITDA",
+            "valor": 19
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nombreEmpresa": "Fara",
+    "periodos": [
+      {
+        "id": 0,
+        "anio": 2010,
+        "tipo": "1S",
+        "indicadores": [
+          {
+            "id": 12,
+            "formula": "ganancia*2",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": true
+          },
+          {
+            "id": 1,
+            "formula": "facturacion-perdida",
+            "name": "ganancia",
+            "cuentasName": [
+              "facturacion",
+              "perdida"
+            ],
+            "indicadores": [],
+            "mutable": false
+          }
+        ],
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "necesidad",
+            "valor": 78.7
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "anio": 2010,
+        "tipo": "2S",
+        "indicadores": [],
+        "cuentas": [
+          {
+            "idCuenta": 5,
+            "nombre": "necesidad",
+            "valor": 56
+          },
+          {
+            "idCuenta": 5,
+            "nombre": "calculo",
+            "valor": 45
+          }
+        ]
+      }
+    ]
+  }
+]

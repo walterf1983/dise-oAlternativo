@@ -2,10 +2,10 @@ package Vistas;
 
 import java.util.ArrayList;
 
+
 import DAO.DAOEmpresa;
 import DAO.DAOIndicador;
 import Objects.Cuenta;
-import Repositorios.RepositorioDeEmpresas;
 
 public class Analizador {
    
@@ -14,8 +14,8 @@ public class Analizador {
 	public static void main(String[] args) {
 		
 		PantallaAgregarCuenta.setCountInstance(0);
-		DAOEmpresa.setupINDEX("Empresas.json");
-		DAOIndicador.setupINDEX("IndicadoresPosta.json");
+		DAOEmpresa.setupINDEX("EmpresasGenerica.json");
+		DAOIndicador.setupINDEX("EmpresasGenerica.json");
 		System.out.println(DAOIndicador.getIDIndicador());
 		
 		VentanaPrincipal ventanaP = new VentanaPrincipal();

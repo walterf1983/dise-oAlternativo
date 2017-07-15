@@ -2,13 +2,15 @@ package Objects;
 
 import java.util.ArrayList;
 
+import DAO.DAOIndicador;
+
 @SuppressWarnings("serial")
 public class IndicadorCompuestoPredefinido extends Indicador {
 
 
 
-	public IndicadorCompuestoPredefinido(String formula, String name, ArrayList<String> nombreCuentas,ArrayList<Indicador> indicadores) {
-		super(formula, name, nombreCuentas, indicadores);
+	public IndicadorCompuestoPredefinido(String formula, String name, ArrayList<String> nombreCuentas,ArrayList<Indicador> indicadores,DAOIndicador dao) {
+		super(formula, name, nombreCuentas, indicadores,dao);
 		this.mutable=this.isMutable();
 		
 	}

@@ -7,9 +7,14 @@ import com.google.gson.reflect.TypeToken;
 
 import Objects.Cuenta;
 import Objects.Empresa;
+import Objects.Indicador;
 import Objects.Periodo;
 
 	public class DAOEmpresa extends DAOGenerico{
+
+		public DAOEmpresa(String path) {
+			super(path,new TypeToken<ArrayList<Empresa>>(){}.getType());
+		}
 
 		private static int IDEmpresa;
 		private static int IDCuenta;
@@ -39,10 +44,6 @@ import Objects.Periodo;
 
 		public static int getIDPeriodo() {
 			return IDPeriodo;
-		}
-
-		public DAOEmpresa(String path) {
-			super(path,new TypeToken<ArrayList<Empresa>>(){}.getType());
 		}
 
 		public static void setupINDEX(String path){
@@ -190,6 +191,7 @@ import Objects.Periodo;
 
 		public ArrayList<Empresa> getAllEmpresas(){
 			ArrayList<Empresa> empresas=new ArrayList<Empresa>();
+			
 			try {
 				 empresas= this.getAllItems().
 								stream().
@@ -197,6 +199,7 @@ import Objects.Periodo;
 								collect(Collectors.toCollection(ArrayList::new));
 			} catch (Exception e) {
 			}
+		
 			return empresas;
 		}
 		
@@ -205,10 +208,12 @@ import Objects.Periodo;
 			int u=-1;
 			Double value=Double.parseDouble(valor);
 			ArrayList<Periodo>periodos=new ArrayList<Periodo>();
+			ArrayList<Indicador>indicadores=new ArrayList<Indicador>();
 			ArrayList<Cuenta>aCuentas=new ArrayList<Cuenta>();
 			aCuentas.add(new Cuenta(cuenta,value,this));
+			Empresa empresa;
 			if(!this.estaEmpresa(nombreEmpresa)){
-				periodos.add(new Periodo(Integer.parseInt(anio),tipo,aCuentas,this));
+				periodos.add(new Periodo(Integer.parseInt(anio),tipo,aCuentas,indicadores,this));
 			
 					try {
 						this.addItem(new Empresa(nombreEmpresa,periodos,this));
@@ -218,8 +223,12 @@ import Objects.Periodo;
 			
 				return 1;
 			}else{
-				Empresa empresa=this.buscarEmpresa(nombreEmpresa);
-				u=empresa.addCuenta(aCuentas.get(0), new Periodo(Integer.parseInt(anio),tipo,aCuentas,this));
+				empresa=this.buscarEmpresa(nombreEmpresa);
+				if(!empresa.estaPeriodo(Integer.parseInt(anio),tipo)){
+					u=empresa.addCuenta(aCuentas.get(0), new Periodo(Integer.parseInt(anio),tipo,aCuentas,indicadores,this));
+				}else{
+				Periodo periodo=empresa.getPeriodo(Integer.parseInt(anio), tipo);
+				u=empresa.addCuenta(aCuentas.get(0),periodo);
 		
 				if(u==2||u==3||u==0)
 					try {
@@ -227,8 +236,9 @@ import Objects.Periodo;
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-			return u;
+				}
 			}
+			return u;
 		}
 		
 		public ArrayList<Integer> getAniosPorEmpresa(String empresa){

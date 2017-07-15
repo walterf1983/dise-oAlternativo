@@ -67,35 +67,27 @@ public class Empresa extends Item implements Serializable{
 
 		int a;
 		
-		if(!this.estaPeriodo(periodo)){//no está el periodo
+		if(!this.estaPeriodo(periodo.getAnio(),periodo.getTipo())){//no está el periodo
 			this.getPeriodos().add(periodo);
 			a=2;
 		}else{//esta el periodo
-			a=this.getPeriodo(periodo).addCuenta(cuenta);
+			a=this.getPeriodo(periodo.getAnio(),periodo.getTipo()).addCuenta(cuenta);
 		}
 		return a;
 	}
 	
 	public boolean estaCuenta(Cuenta cuenta,Periodo periodo) {
-		return this.getPeriodo(periodo).estaCuenta(cuenta);
+		return this.getPeriodo(periodo.getAnio(),periodo.getTipo()).estaCuenta(cuenta);
 	}
 
-	public Periodo getPeriodo(Periodo periodo) {
+	public Periodo getPeriodo(int anio, String tipo) {
 		return (this.getPeriodos().
 				stream().
-				filter(e->e.esPeriodo(periodo)).
+				filter(e->e.getAnio()==anio&&e.getTipo().equalsIgnoreCase(tipo)).
 				findFirst().
 				get());
 		
 	}
-
-	public boolean estaPeriodo(Periodo periodo) {
-		return (this.getPeriodos().
-				stream().
-				filter(e->e.esPeriodo(periodo)).
-				findFirst().
-				isPresent());
-		}
 
 	/* Static methods */
 	
@@ -113,5 +105,13 @@ public class Empresa extends Item implements Serializable{
 					   .filter(empresa -> empresa.getName().equals(nombre))
 					   .collect(Collectors.toList())
 					   .get(0);
+	}
+
+	public boolean estaPeriodo(int anio, String tipo) {
+		return this.getPeriodos().
+					stream().
+					filter(e->e.getAnio()==anio&&e.getTipo().equalsIgnoreCase(tipo)).
+					findFirst().
+					isPresent();
 	}
 }

@@ -7,9 +7,18 @@ import java.util.ArrayList;
 import org.mariuszgromada.math.mxparser.Argument;
 import org.mariuszgromada.math.mxparser.Expression;
 
+import DAO.DAOIndicador;
+
 @SuppressWarnings("serial")
 public class IndicadorAbs extends Item implements Serializable{
 
+	public IndicadorAbs(String formula,String name, ArrayList<String>nombreCuentas,ArrayList <Indicador>indicadores,DAOIndicador dao) {
+		this.id = dao.bucarIDIndicador(formula);
+		this.formula = formula;
+		this.name = name;
+		this.cuentasName=nombreCuentas;
+		this.indicadores=indicadores;
+	}
 	protected int id;
 	protected String formula;
 	protected String name;
@@ -35,14 +44,6 @@ public class IndicadorAbs extends Item implements Serializable{
 	}
 	static public int nextID(){
 		return ID=ID+1;
-	}
-	
-	public IndicadorAbs(String formula,String name, ArrayList<String>nombreCuentas,ArrayList <Indicador>indicadores) {
-		this.id = IndicadorAbs.nextID();
-		this.formula = formula;
-		this.name = name;
-		this.cuentasName=nombreCuentas;
-		this.indicadores=indicadores;
 	}
 	
 	public static int getID() {

@@ -2,14 +2,16 @@ package Objects;
 
 import java.util.ArrayList;
 
+import DAO.DAOIndicador;
+
 
 @SuppressWarnings("serial")
 public class IndicadorBasePredefinido extends Indicador {
 	
 
 
-	public IndicadorBasePredefinido(String formula, String name, ArrayList<String> nombreCuentas, ArrayList<Indicador>indicadores) {
-		super(formula, name, nombreCuentas,indicadores);
+	public IndicadorBasePredefinido(String formula, String name, ArrayList<String> nombreCuentas, ArrayList<Indicador>indicadores,DAOIndicador dao) {
+		super(formula, name, nombreCuentas,indicadores,dao);
 		this.mutable=this.isMutable();
 	}
 
@@ -26,7 +28,7 @@ public class IndicadorBasePredefinido extends Indicador {
 	
 	@Override
 	public void addCuenta(String cuenta) {
-		System.out.println("No se puede agregar un hijo a una hoja");
+		System.out.println("No se puede agregar a un predefinido");
 	}
 
 	@Override

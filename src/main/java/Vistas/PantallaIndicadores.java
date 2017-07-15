@@ -38,6 +38,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JTextPane;
+import javax.swing.JTabbedPane;
 
 @SuppressWarnings("serial")
 public class PantallaIndicadores extends JFrame {
@@ -93,7 +94,7 @@ public class PantallaIndicadores extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(-3, 280, 450, 321);
+		setBounds(-3, 280, 589, 438);
 		setLocationRelativeTo(null);
 
 		contentPane = new JPanel();
@@ -101,6 +102,33 @@ public class PantallaIndicadores extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		
+		botonAgregar = new JButton("AGREGAR");
+		
+		botonAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonAgregar.setEnabled(false);
+				@SuppressWarnings("unused")
+				PantallaAgregarCuenta epantallaAgregarCuenta=new PantallaAgregarCuenta(window);
+				botonVolver.setEnabled(false);
+			}
+		});
+		botonAgregar.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		botonAgregar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		botonAgregar.setBounds(471, 392, 95, 23);
+		contentPane.add(botonAgregar);
+		
+		botonVolver= new JButton("VOLVER");
+		botonVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				fatherWindow.setVisible(true);
+			}
+		});
+		botonVolver.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		botonVolver.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		botonVolver.setBounds(366, 392, 95, 23);
+		contentPane.add(botonVolver);
 		
 		comboEmpresa = new JComboBox<String>();
 		comboEmpresa.setBackground(Color.WHITE);
@@ -110,16 +138,16 @@ public class PantallaIndicadores extends JFrame {
 		JTextPane txtpnSaddaAssdaAds = new JTextPane();
 		txtpnSaddaAssdaAds.setBorder(null);
 		txtpnSaddaAssdaAds.setOpaque(false);
-		txtpnSaddaAssdaAds.setFont(new Font("Times New Roman", Font.ITALIC, 13));
-		txtpnSaddaAssdaAds.setText("Muestra la tabla de cuentas globales del sistema.\r\nTilde las cuentas de la tabla ue desee cargarla al sistema.");
-		txtpnSaddaAssdaAds.setBounds(106, 237, 323, 38);
+		txtpnSaddaAssdaAds.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		txtpnSaddaAssdaAds.setText("Muestra la tabla de indicadores globales del sistema.\r\nTilde los indicadores de la tabla ue desee cargar al sistema.");
+		txtpnSaddaAssdaAds.setBounds(101, 357, 308, 25);
 		contentPane.add(txtpnSaddaAssdaAds);
 		
 		
 		botonCargar = new JButton("CARGAR");
 		botonCargar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		botonCargar.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		botonCargar.setBounds(29, 242, 72, 23);
+		botonCargar.setBounds(24, 359, 72, 23);
 		contentPane.add(botonCargar);
 		botonCargar.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
@@ -136,7 +164,7 @@ public class PantallaIndicadores extends JFrame {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(29, 123, 385, 108);
+		scrollPane.setBounds(22, 123, 544, 223);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -191,46 +219,19 @@ public class PantallaIndicadores extends JFrame {
 		lblElijaUnaEmpresa.setBackground(new Color(255, 255, 255));
 		lblElijaUnaEmpresa.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblElijaUnaEmpresa.setVerticalAlignment(SwingConstants.TOP);
-		lblElijaUnaEmpresa.setBounds(10, 11, 424, 89);
+		lblElijaUnaEmpresa.setBounds(10, 11, 569, 416);
 		contentPane.add(lblElijaUnaEmpresa);
 			
 		this.loadEventComboTipo(repoEmpresa,this);
 		this.loadEventComboEmpresa(repoEmpresa,lblElijaUnaEmpresa ,lblAo,lblPeriodo,this);
 		this.loadComboBoxAnio(repoEmpresa,this);
 		
-		botonAgregar = new JButton("AGREGAR");
-		
-		botonAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				botonAgregar.setEnabled(false);
-				@SuppressWarnings("unused")
-				PantallaAgregarCuenta epantallaAgregarCuenta=new PantallaAgregarCuenta(window);
-				botonVolver.setEnabled(false);
-			}
-		});
-		botonAgregar.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		botonAgregar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		botonAgregar.setBounds(339, 288, 95, 23);
-		contentPane.add(botonAgregar);
-		
-		botonVolver= new JButton("VOLVER");
-		botonVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				fatherWindow.setVisible(true);
-			}
-		});
-		botonVolver.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		botonVolver.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		botonVolver.setBounds(234, 288, 95, 23);
-		contentPane.add(botonVolver);
-		
 		JLabel label = new JLabel("");
 		label.setVerticalAlignment(SwingConstants.TOP);
 		label.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		label.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 255), new Color(102, 205, 170), new Color(0, 0, 205), new Color(72, 209, 204)), "", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(128, 0, 0)));
 		label.setBackground(Color.WHITE);
-		label.setBounds(10, 108, 424, 167);
+		label.setBounds(10, 108, 569, 319);
 		contentPane.add(label);
 		
 	}
@@ -310,12 +311,12 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 			new Object[][] {
 			},
 			new String[] {
-				"Id", "Nombre", "Valor", "Check"
+				"Id", "Nombre","Formula", "Valor","Tipo", "Check"
 			}
 			) {
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Double.class, Boolean.class
+				Integer.class, String.class,String.class, Double.class,String.class, Boolean.class
 			};
 			public Class<?> getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
