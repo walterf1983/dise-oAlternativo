@@ -46,7 +46,7 @@ public class PruebasGsonRealise {
 	cuentasBase1.add("cRA");
 	cuentasBase1.add("ar");
 	cuentasBase1.add("f");
-	IndicadorBase indicadorBase=new IndicadorBase("SALDO", "IndicadorBase1", cuentasBase1);
+//	IndicadorBase indicadorBase=new IndicadorBase("SALDO", "IndicadorBase1", cuentasBase1);
 	cuentasBase1.sort(null);
 	cuentasBase1.forEach(e->System.out.println(e));
 	
@@ -55,8 +55,8 @@ public class PruebasGsonRealise {
 	ArrayList<String> cuentasBase2=new ArrayList<String>();
 	cuentasBase2.add("neto");
 	ArrayList<Indicador> indicadores1=new ArrayList<Indicador>();
-	indicadores1.add(indicadorBase);
-	IndicadorCompuestoPredefinido indicador2=new IndicadorCompuestoPredefinido("EBITDA+neto", "indicador2", cuentasBase2, indicadores1);
+	//indicadores1.add(indicadorBase);
+	//IndicadorCompuestoPredefinido indicador2=new IndicadorCompuestoPredefinido("EBITDA+neto", "indicador2", cuentasBase2, indicadores1);
 	ArrayList<Indicador>indicadores=repo.getAllIndicadores();
 	}		
 }

@@ -61,7 +61,7 @@ public class PantallaIndicadores extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(-3, 280, 589, 438);
+		setBounds(-3, 280, 589, 355);
 		setLocationRelativeTo(null);
 	
 		contentPane = new JPanel();
@@ -82,7 +82,7 @@ public class PantallaIndicadores extends JFrame {
 		});
 		botonAgregar.setFont(new Font("Times New Roman", Font.BOLD, 11));
 		botonAgregar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		botonAgregar.setBounds(471, 392, 95, 23);
+		botonAgregar.setBounds(471, 312, 95, 23);
 		contentPane.add(botonAgregar);
 		
 		botonVolver= new JButton("VOLVER");
@@ -94,7 +94,7 @@ public class PantallaIndicadores extends JFrame {
 		});
 		botonVolver.setFont(new Font("Times New Roman", Font.BOLD, 11));
 		botonVolver.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		botonVolver.setBounds(366, 392, 95, 23);
+		botonVolver.setBounds(366, 312, 95, 23);
 		contentPane.add(botonVolver);
 		
 		comboEmpresa = new JComboBox<String>();
@@ -107,14 +107,14 @@ public class PantallaIndicadores extends JFrame {
 		txtpnSaddaAssdaAds.setOpaque(false);
 		txtpnSaddaAssdaAds.setFont(new Font("Times New Roman", Font.ITALIC, 12));
 		txtpnSaddaAssdaAds.setText("Muestra la tabla de indicadores globales del sistema.\r\nTilde los indicadores de la tabla ue desee cargar al sistema.");
-		txtpnSaddaAssdaAds.setBounds(106, 359, 308, 25);
+		txtpnSaddaAssdaAds.setBounds(104, 276, 308, 25);
 		contentPane.add(txtpnSaddaAssdaAds);
 		
 		
 		botonCargar = new JButton("CARGAR");
 		botonCargar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		botonCargar.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		botonCargar.setBounds(24, 359, 72, 23);
+		botonCargar.setBounds(22, 276, 72, 25);
 		contentPane.add(botonCargar);
 		botonCargar.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
@@ -131,7 +131,7 @@ public class PantallaIndicadores extends JFrame {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 123, 544, 228);
+		scrollPane.setBounds(22, 123, 544, 142);
 		contentPane.add(scrollPane);
 		
 		table = new JTable(getTableDefaultModel()){
@@ -144,10 +144,12 @@ public class PantallaIndicadores extends JFrame {
 	    }};
 		this.establecerColumnas(new int[]{0,3});
 		table.addMouseListener(new MouseAdapter() {
+	
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				PantallaSubindicadores ps;
 				if(arg0.getClickCount()==3&&table.getSelectedColumn()!=5&&0==arg0.getModifiersEx())
-					System.out.println("doble");
+					ps=new PantallaSubindicadores(window, cuentasGlobales);
 				}});
 		table.setDropMode(DropMode.INSERT);
 		table.setSize(new Dimension(0, 0));
@@ -210,7 +212,7 @@ public class PantallaIndicadores extends JFrame {
 		label.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		label.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 255), new Color(102, 205, 170), new Color(0, 0, 205), new Color(72, 209, 204)), "", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(128, 0, 0)));
 		label.setBackground(Color.WHITE);
-		label.setBounds(10, 112, 569, 315);
+		label.setBounds(10, 112, 569, 233);
 		contentPane.add(label);
 		
 	}
