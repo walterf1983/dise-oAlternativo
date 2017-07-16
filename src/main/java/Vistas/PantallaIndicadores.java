@@ -8,8 +8,6 @@ import javax.swing.border.EmptyBorder;
 
 
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-
 import java.awt.Color;
 import java.awt.Component;
 
@@ -38,14 +36,11 @@ import javax.swing.JScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JTextPane;
-import javax.swing.AbstractButton;
 import javax.swing.DropMode;
 
 @SuppressWarnings("serial")
@@ -401,11 +396,25 @@ public class PantallaIndicadores extends JFrame {
 					return columnTypes[columnIndex];
 				}
 			});
-			table.getColumnModel().getColumn(0).setPreferredWidth(34);
-			table.getColumnModel().getColumn(1).setPreferredWidth(96);
-			table.getColumnModel().getColumn(2).setPreferredWidth(180);
-			table.getColumnModel().getColumn(4).setPreferredWidth(140);
-			table.getColumnModel().getColumn(5).setPreferredWidth(45);
+		table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
+			  @Override
+			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			        this.setHorizontalAlignment(SwingConstants.CENTER);
+			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		 }});
+		table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer(){
+			  @Override
+			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			        this.setHorizontalAlignment(SwingConstants.CENTER);
+			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		 }});
+	
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(70);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(30);
 		
 			DAOIndicador dao=(DAOIndicador)empresasR.getDao();
 	
