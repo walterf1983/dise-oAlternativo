@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import DAO.DAOEmpresa;
 import DAO.DAOIndicador;
@@ -42,6 +43,8 @@ import javax.swing.JButton;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JTextPane;
 import javax.swing.DropMode;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class PantallaIndicadores extends JFrame {
@@ -57,7 +60,7 @@ public class PantallaIndicadores extends JFrame {
 		setTitle("CargadorCuentas");
 		setVisible(true);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(-3, 280, 589, 438);
 		setLocationRelativeTo(null);
 	
@@ -131,75 +134,28 @@ public class PantallaIndicadores extends JFrame {
 		scrollPane.setBounds(22, 123, 544, 228);
 		contentPane.add(scrollPane);
 		
-		table = new JTable(){
+		table = new JTable(getTableDefaultModel()){
 			@Override
 			public Component prepareRenderer(TableCellRenderer renderer,int rowIndex,int columnIndex) {
-				Component d=super.prepareRenderer(renderer, rowIndex, columnIndex);
-				
-				
-				this.setAlignmentX(0.5f);
-	        	this.setAlignmentY(0.5f);
-				
-	        if(columnIndex ==5){
-	        
+				Component d=super.prepareRenderer(renderer, rowIndex, columnIndex);      
+				if(columnIndex ==5)
 	        	d.setBackground(Color.BLUE);
-	        }
-	        
-	      
-	      return d;
+			return d;
 	    }};
+		this.establecerColumnas(new int[]{0,3});
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount()==3&&table.getSelectedColumn()!=5&&0==arg0.getModifiersEx())
+					System.out.println("doble");
+				}});
 		table.setDropMode(DropMode.INSERT);
 		table.setSize(new Dimension(0, 0));
 		table.setGridColor(new Color(0,0,128));
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 255), new Color(0, 191, 255), new Color(0, 0, 255), new Color(64, 224, 208)));
 		table.setFont(new Font("Consolas",Font.BOLD,14));
 		scrollPane.setViewportView(table);
-		table.setDefaultRenderer (Integer.class, new DefaultTableCellRenderer(){
-			@Override  
-			public Component getTableCellRendererComponent(JTable table,
-					      Object value,
-					      boolean isSelected,
-					      boolean hasFocus,
-					      int row,
-					      int column)
-					   {
-					      Component c=super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
-					      if ( column<5)
-					      {
-					        this.setOpaque(true);
-					        this.setAlignmentY(CENTER_ALIGNMENT);
-					       
-					      } else {
-					         // Restaurar los valores por defecto
-					      }
 
-					      return c;
-					   }
-		});
-		table.setDefaultRenderer (Double.class, new DefaultTableCellRenderer(){
-			@Override  
-			public Component getTableCellRendererComponent(JTable table,
-					      Object value,
-					      boolean isSelected,
-					      boolean hasFocus,
-					      int row,
-					      int column)
-					   {
-							this.setOpaque(true);
-					        this.setAlignmentX(CENTER_ALIGNMENT );
-					      Component c=super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
-					      if ( column<5)
-					      {
-					        this.setOpaque(true);
-					        this.setAlignmentX(CENTER_ALIGNMENT );
-					       
-					      } else {
-					         // Restaurar los valores por defecto
-					      }
-
-					      return c;
-					   }
-		});
 		this.loadEmpresasCombo(comboEmpresa,repoEmpresa);
 		contentPane.add(comboEmpresa);
 		
@@ -297,6 +253,68 @@ public class PantallaIndicadores extends JFrame {
 		return repo;
 	}
 
+	private TableModel getTableDefaultModel() {
+		return new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Id", "Nombre", "Formula", "Valor", "Tipo", "Check"
+				}
+				) { 		
+					@Override
+					public boolean isCellEditable(int row, int column) {
+						if(column<5)
+							return false;
+						return true;
+					}
+		
+					@SuppressWarnings("rawtypes")
+					Class[] columnTypes = new Class[] {
+							Integer.class, String.class, String.class, Double.class, String.class, Boolean.class
+					};
+				
+					@SuppressWarnings({ "unchecked", "rawtypes" })
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+	};}
+
+	
+	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
+			table.setModel(getTableDefaultModel());
+			this.establecerColumnas(new int[]{0,3});
+			DAOIndicador dao=(DAOIndicador)empresasR.getDao();
+		
+		
+			String empresaS=(String)comboEmpresa.getSelectedItem();	
+			Empresa empresa=dao.buscarEmpresa(empresaS);
+			Periodo periodo= empresa.getPeriodo(Integer.parseInt((String) comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem());
+			DefaultTableModel m =(DefaultTableModel) table.getModel();
+			
+			//falta defenir el tipo y si va o no check
+			for(Indicador c:periodo.getIndicadores()){
+				Object[]row={c.getId(),c.getName(),new String(c.getFormula()),new Double(24),new String(c.getClass().getSimpleName()),new Boolean(false)};
+				m.addRow(row);
+			}
+	}
+
+	private void establecerColumnas(int[] columnas) {
+		for(int columna:columnas){
+			table.getColumnModel().getColumn(columna).setCellRenderer(new DefaultTableCellRenderer(){
+				  @Override
+				    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				        this.setHorizontalAlignment(SwingConstants.CENTER);
+				        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			 }});
+		}
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(70);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(30);
+	}
+
 	private void loadEventComboEmpresa(RepositorioDeEmpresas empresasR,JLabel label1,JLabel label2,JLabel label3,JFrame ventana){
 		comboEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -321,6 +339,17 @@ public class PantallaIndicadores extends JFrame {
 					
 			}
 		});
+	}
+
+	private void loadEmpresasCombo(JComboBox<String> comboBoxEmpresa, RepositorioDeEmpresas empresas){
+	
+		for(Empresa e:empresas.getAllEmpresas()){
+			for(Periodo periodo:e.getPeriodos())
+				if(!periodo.getIndicadores().isEmpty()){
+					comboBoxEmpresa.insertItemAt(e.getName(), comboBoxEmpresa.getItemCount());
+					break;
+				}
+		}
 	}
 
 	private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
@@ -360,76 +389,6 @@ public class PantallaIndicadores extends JFrame {
 		
 	}
 
-
-	private void loadEmpresasCombo(JComboBox<String> comboBoxEmpresa, RepositorioDeEmpresas empresas){
-	
-		for(Empresa e:empresas.getAllEmpresas()){
-			for(Periodo periodo:e.getPeriodos())
-				if(!periodo.getIndicadores().isEmpty()){
-					comboBoxEmpresa.insertItemAt(e.getName(), comboBoxEmpresa.getItemCount());
-					break;
-				}
-		}
-	}
-	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Id", "Nombre", "Formula", "Valor", "Tipo", "Check"
-				}
-			) { 		
-				@Override
-				public boolean isCellEditable(int row, int column) {
-					if(column<5)
-						return false;
-					return true;
-			}
-				
-				@SuppressWarnings("rawtypes")
-				Class[] columnTypes = new Class[] {
-					Integer.class, String.class, String.class, Double.class, String.class, Boolean.class
-				};
-				
-				@SuppressWarnings({ "unchecked", "rawtypes" })
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			});
-		table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-		table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-	
-		table.getColumnModel().getColumn(0).setPreferredWidth(20);
-		table.getColumnModel().getColumn(1).setPreferredWidth(100);
-		table.getColumnModel().getColumn(2).setPreferredWidth(150);
-		table.getColumnModel().getColumn(3).setPreferredWidth(70);
-		table.getColumnModel().getColumn(4).setPreferredWidth(100);
-		table.getColumnModel().getColumn(5).setPreferredWidth(30);
-		
-			DAOIndicador dao=(DAOIndicador)empresasR.getDao();
-	
-	
-		String empresaS=(String)comboEmpresa.getSelectedItem();	
-		Empresa empresa=dao.buscarEmpresa(empresaS);
-		Periodo periodo= empresa.getPeriodo(Integer.parseInt((String) comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem());
-		DefaultTableModel m =(DefaultTableModel) table.getModel();
-		
-		//falta defenir el tipo y si va o no check
-		for(Indicador c:periodo.getIndicadores()){
-			Object[]row={c.getId(),c.getName(),new String(c.getFormula()),new Double(24),new String(c.getClass().getSimpleName()),new Boolean(false)};
-			m.addRow(row);
-		}
-}
 
 	private void loadGlobalCuentas(){
 		DefaultTableModel m=(DefaultTableModel) table.getModel();

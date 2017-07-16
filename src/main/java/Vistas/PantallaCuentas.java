@@ -26,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import DAO.DAOEmpresa;
 import Objects.Cuenta;
@@ -57,7 +58,7 @@ public class PantallaCuentas extends JFrame {
 		setTitle("CargadorCuentas");
 		setVisible(true);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(-3, 280, 450, 321);
 		setLocationRelativeTo(null);
 	
@@ -104,28 +105,7 @@ public class PantallaCuentas extends JFrame {
 		scrollPane.setBounds(29, 123, 385, 108);
 		contentPane.add(scrollPane);
 		
-		table = new JTable(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Id", "Nombre", "Valor","Check"
-				}
-				) {
-				@Override
-				public boolean isCellEditable(int row, int column) {
-					if(column<3)
-						return false;
-					return true;
-				}
-				
-				@SuppressWarnings("rawtypes")
-				Class[] columnTypes = new Class[] {
-					Integer.class,String.class, Double.class, Boolean.class
-				};
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			}){
+		table = new JTable(this.getDafaultTableModel()){
 			@Override
 			public Component prepareRenderer(TableCellRenderer renderer,int rowIndex,int columnIndex) {
 				Component d=super.prepareRenderer(renderer, rowIndex, columnIndex);      
@@ -138,19 +118,7 @@ public class PantallaCuentas extends JFrame {
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 100, 0), new Color(0, 0, 0), new Color(255, 0, 0), new Color(0, 0, 0)));
 		table.setFont(new Font("Consolas",Font.BOLD,14));
 		scrollPane.setViewportView(table);
-		table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-		table.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-	
+		this.establecerColumnas(new int[]{0,2});
 	
 		
 		this.loadEmpresasCombo(comboEmpresa,repoEmpresa);
@@ -294,6 +262,61 @@ public class PantallaCuentas extends JFrame {
 	}
 
 
+	private TableModel getDafaultTableModel() {
+		return new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Id", "Nombre", "Valor","Check"
+				}
+				) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					if(column<3)
+						return false;
+					return true;
+				}
+				
+				@SuppressWarnings("rawtypes")
+				Class[] columnTypes = new Class[] {
+					Integer.class,String.class, Double.class, Boolean.class
+				};
+				public Class<?> getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+		};
+	}
+
+	private void establecerColumnas(int[] columnas) {
+		for(int columna:columnas)
+			table.getColumnModel().getColumn(columna).setCellRenderer(new DefaultTableCellRenderer(){
+			  @Override
+			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			        this.setHorizontalAlignment(SwingConstants.CENTER);
+			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		 }});
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(30);
+		
+	}
+
+	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
+			DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
+			String empresa=(String)comboEmpresa.getSelectedItem();
+			table.setModel(this.getDafaultTableModel());
+			this.establecerColumnas(new int[]{0,2});
+	
+			DefaultTableModel m =(DefaultTableModel) table.getModel();
+		
+			for(Cuenta c:dao.getCuentasPor(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
+				Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
+				m.addRow(row);
+			}
+	}
+
 	private void loadEmpresasCombo(JComboBox<String> comboBoxEmpresa, RepositorioDeEmpresas empresas){
 	
 		for(Empresa e:empresas.getAllEmpresas())
@@ -348,56 +371,6 @@ private void loadComboBoxAnio(RepositorioDeEmpresas empresasR,JFrame ventana){
 	});
 }
 	
-	private void loadTableByEvent(RepositorioDeEmpresas empresasR){
-		DAOEmpresa dao=(DAOEmpresa)empresasR.getDao();
-		String empresa=(String)comboEmpresa.getSelectedItem();
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Id", "Nombre", "Valor","Check"
-				}
-				) {
-				@Override
-				public boolean isCellEditable(int row, int column) {
-					if(column<3)
-						return false;
-					return true;
-				}
-				
-				@SuppressWarnings("rawtypes")
-				Class[] columnTypes = new Class[] {
-					Integer.class,String.class, Double.class, Boolean.class
-				};
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-	    });
-		table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-		table.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-		table.getColumnModel().getColumn(0).setPreferredWidth(20);
-		table.getColumnModel().getColumn(1).setPreferredWidth(150);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
-		table.getColumnModel().getColumn(3).setPreferredWidth(30);
-
-		DefaultTableModel m =(DefaultTableModel) table.getModel();
-	
-		for(Cuenta c:dao.getCuentasPor(empresa,Integer.parseInt((String)comboAnio.getSelectedItem()),(String)comboTipo.getSelectedItem())){
-			Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
-			m.addRow(row);
-		}
-}
-
 	private void loadGlobalCuentas(){
 		DefaultTableModel m=(DefaultTableModel) table.getModel();
 		DAOEmpresa dao=(DAOEmpresa)repo.getDao();

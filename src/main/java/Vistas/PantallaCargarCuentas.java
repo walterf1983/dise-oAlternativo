@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import DAO.DAOEmpresa;
 import Objects.Cuenta;
@@ -47,67 +48,6 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class PantallaCargarCuentas extends JFrame {
 
-	private JPanel contentPane;
-	private JTable table;
-	private RepositorioDeEmpresas repo;
-	private JButton botonAgregar;
-	private JButton botonCancelar;
-	private  ArrayList<Cuenta> cuentasGlobales;
-	private PantallaCuentas father;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField inCuenta;
-	private JTextField inValor;
-	private JComboBox<Object> comboTipo;
-	private JTextField ingresoEmpresa;
-	private JTextField ingresoAnio;
-	
-	public JTextField getIngresoAnio() {
-		return ingresoAnio;
-	}
-
-
-
-	public JTextField getIngresoEmpresa() {
-		return ingresoEmpresa;
-	}
-
-
-
-	public JComboBox<Object> getComboTipo() {
-		return comboTipo;
-	}
-
-
-
-	public JTable getTable() {
-		return table;
-	}
-
-
-
-	public PantallaCuentas getFather() {
-		return father;
-	}
-
-
-
-	public JButton getBotonCancelar() {
-		return botonCancelar;
-	}
-
-
-
-	public JButton getBotonAgregar() {
-		return botonAgregar;
-	}
-
-
-
-	public RepositorioDeEmpresas getRepo() {
-		return repo;
-	}
-
 	public PantallaCargarCuentas(JFrame fatherWindow, ArrayList<Cuenta> cuentasGlobales) {
 		setUndecorated(true);
 		PantallaCargarCuentas wind= this;
@@ -120,7 +60,7 @@ public class PantallaCargarCuentas extends JFrame {
 		this.setBounds(fatherWindow.getX()-450,fatherWindow.getY(),450,375);//ubica con respecto a la ventana padre
 		setVisible(true);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(220, 220, 220));
@@ -195,28 +135,7 @@ public class PantallaCargarCuentas extends JFrame {
 		scrollPane.setBounds(33, 37, 383, 120);
 		contentPane.add(scrollPane);
 		
-		table = new JTable(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Id", "Nombre", "Valor","Check"
-				}
-				) {
-				@Override
-				public boolean isCellEditable(int row, int column) {
-					if(column<3)
-						return false;
-					return true;
-				}
-				
-				@SuppressWarnings("rawtypes")
-				Class[] columnTypes = new Class[] {
-					Integer.class,String.class, Double.class, Boolean.class
-				};
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			}){
+		table = new JTable(this.getDefaultTableModel()){
 			@Override
 			public Component prepareRenderer(TableCellRenderer renderer,int rowIndex,int columnIndex) {
 				Component d=super.prepareRenderer(renderer, rowIndex, columnIndex);      
@@ -356,6 +275,144 @@ public class PantallaCargarCuentas extends JFrame {
 		
 	}
 
+	private JPanel contentPane;
+	private JTable table;
+	private RepositorioDeEmpresas repo;
+	private JButton botonAgregar;
+	private JButton botonCancelar;
+	private  ArrayList<Cuenta> cuentasGlobales;
+	private PantallaCuentas father;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField inCuenta;
+	private JTextField inValor;
+	private JComboBox<Object> comboTipo;
+	private JTextField ingresoEmpresa;
+	private JTextField ingresoAnio;
+	
+	public JTextField getIngresoAnio() {
+		return ingresoAnio;
+	}
+
+
+
+	public JTextField getIngresoEmpresa() {
+		return ingresoEmpresa;
+	}
+
+
+
+	public JComboBox<Object> getComboTipo() {
+		return comboTipo;
+	}
+
+
+
+	public JTable getTable() {
+		return table;
+	}
+
+
+
+	public PantallaCuentas getFather() {
+		return father;
+	}
+
+
+
+	public JButton getBotonCancelar() {
+		return botonCancelar;
+	}
+
+
+
+	public JButton getBotonAgregar() {
+		return botonAgregar;
+	}
+
+
+
+	public RepositorioDeEmpresas getRepo() {
+		return repo;
+	}
+
+	private TableModel getDefaultTableModel() {
+		return  new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Id", "Nombre", "Valor","Check"
+				}
+				) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					if(column<3)
+						return false;
+					return true;
+				}
+				
+				@SuppressWarnings("rawtypes")
+				Class[] columnTypes = new Class[] {
+					Integer.class,String.class, Double.class, Boolean.class
+				};
+				public Class<?> getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+				};
+	}
+
+
+
+	private void establecerColumnas(int[] Columnas) {
+		for(int columna:Columnas){
+			table.getColumnModel().getColumn(columna).setCellRenderer(new DefaultTableCellRenderer(){
+				  @Override
+				    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				        this.setHorizontalAlignment(SwingConstants.CENTER);
+				        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			 }});
+		}
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(30);
+		
+	}
+
+
+
+	private void loadTable(){
+		table.setModel(this.getDefaultTableModel());
+		this.establecerColumnas(new int[]{0,2});
+		table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
+			  @Override
+			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			        this.setHorizontalAlignment(SwingConstants.CENTER);
+			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		 }});
+		table.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer(){
+			  @Override
+			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			        this.setHorizontalAlignment(SwingConstants.CENTER);
+			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		 }});
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(30);
+	
+	
+	
+		DefaultTableModel m =(DefaultTableModel) table.getModel();
+	
+		for(Cuenta c:cuentasGlobales){
+			Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
+			m.addRow(row);
+		}
+	}
+
+
+
 	private void agregarCuentaGlobalATabla(DefaultTableModel m) {
 		//en caso ue no esta decrementar el contador de id de cuenta -- falta
 		DAOEmpresa dao=(DAOEmpresa)repo.getDao();
@@ -408,56 +465,6 @@ public class PantallaCargarCuentas extends JFrame {
 			}
 		}
 		return 0;
-	}
-
-	private void loadTable(){
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Id", "Nombre", "Valor","Check"
-				}
-				) {
-				@Override
-				public boolean isCellEditable(int row, int column) {
-					if(column<3)
-						return false;
-					return true;
-				}
-				
-				@SuppressWarnings("rawtypes")
-				Class[] columnTypes = new Class[] {
-					Integer.class,String.class, Double.class, Boolean.class
-				};
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-	    });
-		table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-		table.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer(){
-			  @Override
-			    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			        this.setHorizontalAlignment(SwingConstants.CENTER);
-			        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		 }});
-		table.getColumnModel().getColumn(0).setPreferredWidth(20);
-		table.getColumnModel().getColumn(1).setPreferredWidth(150);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
-		table.getColumnModel().getColumn(3).setPreferredWidth(30);
-
-
-	
-		DefaultTableModel m =(DefaultTableModel) table.getModel();
-	
-		for(Cuenta c:cuentasGlobales){
-			Object[]row={c.getId(),c.getName(),new Double(c.getValor()),new Boolean(false)};
-			m.addRow(row);
-		}
 	}
 
 	private boolean asegurarIngresoTextoUsuario(String caracteresValidos,String ingreso){
