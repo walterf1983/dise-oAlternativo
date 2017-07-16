@@ -3,6 +3,7 @@ package Vistas;
 
 
 import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -32,6 +33,7 @@ public class VentanaPrincipal extends JFrame{
 		setUndecorated(true);
 		setResizable(true);
 		this.setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dimensionWindows=Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((dimensionWindows.width-418)/2,(dimensionWindows.height-320)/2,418,320);
@@ -70,7 +72,6 @@ public class VentanaPrincipal extends JFrame{
 		contentPane.add(lblFrbaSistemas);
 		
 		JLabel lblNewLabel_1 = new JLabel(" @2017 - UTN");
-		lblNewLabel_1.setDisabledIcon(new ImageIcon("E:\\Materias\\Dise\u00F1o\\PruebaPildoras\\ProgramarClaseSwing\\src\\Ventanas\\4.jpg"));
 		lblNewLabel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(204, 204, 204), new Color(204, 204, 204), new Color(0, 0, 0), new Color(0, 0, 0)));
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Consolas", Font.BOLD | Font.ITALIC, 14));
@@ -82,7 +83,6 @@ public class VentanaPrincipal extends JFrame{
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblAnalizadorDeNegocios = new JLabel("ANALIZADOR DE NEGOCIOS");
-		lblAnalizadorDeNegocios.setDisabledIcon(new ImageIcon("E:\\Materias\\Dise\u00F1o\\PruebaPildoras\\ProgramarClaseSwing\\src\\Ventanas\\ima.jpg"));
 		lblAnalizadorDeNegocios.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblAnalizadorDeNegocios.setForeground(new Color(255, 255, 255));
 		lblAnalizadorDeNegocios.setVerticalAlignment(SwingConstants.TOP);

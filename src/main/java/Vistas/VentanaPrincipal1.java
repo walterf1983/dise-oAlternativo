@@ -19,7 +19,7 @@ public class VentanaPrincipal1 extends JFrame {
 		setResizable(false);
 		this.setUndecorated(true);
 		setTitle("Analizador de Negocios - Inicio");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Wrinkled_Paper.gif"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dimensionWindows=Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((dimensionWindows.width-640)/2,(dimensionWindows.height-400)/2,640,400);
