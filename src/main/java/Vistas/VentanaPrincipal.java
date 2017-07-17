@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame{
 		setUndecorated(true);
 		setResizable(true);
 		this.setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dimensionWindows=Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((dimensionWindows.width-418)/2,(dimensionWindows.height-320)/2,418,320);
@@ -46,7 +46,7 @@ public class VentanaPrincipal extends JFrame{
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setIconTextGap(7);
-		lblNewLabel.setIcon(new ImageIcon("gato-18.gif"));
+		lblNewLabel.setIcon(new ImageIcon("src//main//java//VariablesGraficas//gato-18.gif"));
 		lblNewLabel.setBounds(10, 101, 243, 184);
 		contentPane.add(lblNewLabel);
 		

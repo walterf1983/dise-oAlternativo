@@ -59,16 +59,16 @@ public class PantallaSubindicadores extends JFrame {
 		setUndecorated(true);
 		PantallaSubindicadores window = this;
 		this.cuentasGlobales=cuentasGlobales;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		repo=repoEmpresa;
 		PantallaIndicadores pantalla=(PantallaIndicadores)fatherWindow;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setTitle("CargadorCuentas");
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//setBounds(100, 280+325, 589+200, 325);
-		setBounds(pantalla.getX(),pantalla.getY()-pantalla.getHeight()+140,pantalla.getWidth()+80,pantalla.getHeight()-140);
+		setBounds(pantalla.getX(),pantalla.getY()-pantalla.getHeight()+140,pantalla.getWidth()+75,pantalla.getHeight()-140);
 	
 		
 		

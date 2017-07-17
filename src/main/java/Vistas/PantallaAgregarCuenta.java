@@ -65,9 +65,9 @@ public class PantallaAgregarCuenta extends JFrame {
 	public PantallaAgregarCuenta(JFrame fatherWindow) {
 		this.setUndecorated(true);
 		PantallaAgregarCuenta wind=this;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		PantallaAgregarCuenta.setCountInstance(PantallaAgregarCuenta.getCountInstance()+1);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setTitle("CargadorCuentas");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

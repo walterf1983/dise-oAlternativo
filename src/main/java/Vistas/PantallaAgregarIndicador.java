@@ -65,9 +65,9 @@ public class PantallaAgregarIndicador extends JFrame {
 	public PantallaAgregarIndicador(JFrame fatherWindow) {
 		this.setUndecorated(true);
 		PantallaAgregarIndicador wind=this;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		PantallaAgregarIndicador.setCountInstance(PantallaAgregarIndicador.getCountInstance()+1);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setTitle("CargadorCuentas");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -54,9 +54,9 @@ public class PantallaIndicadores extends JFrame {
 		setUndecorated(true);
 		PantallaIndicadores window = this;
 		this.cuentasGlobales=cuentasGlobales;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		repo=repoEmpresa;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setTitle("CargadorCuentas");
 		setVisible(true);
 		setResizable(false);
@@ -147,6 +147,7 @@ public class PantallaIndicadores extends JFrame {
 	
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				@SuppressWarnings("unused")
 				PantallaSubindicadores ps;
 				if(arg0.getClickCount()==3&&table.getSelectedColumn()!=5&&0==arg0.getModifiersEx())
 					ps=new PantallaSubindicadores(window, cuentasGlobales);

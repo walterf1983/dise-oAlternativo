@@ -55,7 +55,7 @@ public class LaminaSubindicadores extends JPanel {
 		
 		LaminaSubindicadores window = this;
 		this.cuentasGlobales=cuentasGlobales;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		repo=repoEmpresa;
 		//PantallaIndicadores pantalla=(PantallaIndicadores)fatherWindow;
 		setVisible(true);

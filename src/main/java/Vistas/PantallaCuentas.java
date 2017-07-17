@@ -52,9 +52,9 @@ public class PantallaCuentas extends JFrame {
 		setUndecorated(true);
 		PantallaCuentas window = this;
 		this.cuentasGlobales=cuentasGlobales;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		repo=repoEmpresa;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setTitle("CargadorCuentas");
 		setVisible(true);
 		setResizable(false);

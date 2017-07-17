@@ -19,7 +19,7 @@ public class VentanaPrincipal1 extends JFrame {
 		setResizable(false);
 		this.setUndecorated(true);
 		setTitle("Analizador de Negocios - Inicio");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dimensionWindows=Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((dimensionWindows.width-640)/2,(dimensionWindows.height-400)/2,640,400);
@@ -40,7 +40,7 @@ public class VentanaPrincipal1 extends JFrame {
 	 
 	public void paintComponent(Graphics grafico) {
 		Dimension height = getSize();
-		grafico.drawImage( Toolkit.getDefaultToolkit().getImage("depositphotos_39618097-stock-photo-law-concept-business-man-with.jpg"), 0, 0, height.width, height.height, null);
+		grafico.drawImage( Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//depositphotos_39618097-stock-photo-law-concept-business-man-with.jpg"), 0, 0, height.width, height.height, null);
 		grafico.setFont(new Font("Consolas",Font.PLAIN,30));
 		grafico.drawString("Analizador de Negocios",50,50);
 		grafico.setFont(new Font("Courier",Font.BOLD,20));

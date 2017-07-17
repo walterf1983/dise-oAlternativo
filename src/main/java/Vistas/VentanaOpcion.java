@@ -30,7 +30,7 @@ public class VentanaOpcion extends JFrame {
 		
 		getContentPane().setBackground(new Color(220, 220, 220));
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setUndecorated(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(498,100);

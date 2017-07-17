@@ -29,8 +29,8 @@ public class Analizador {
 			}
 		
 		PantallaAgregarCuenta.setCountInstance(0);
-		DAOEmpresa.setupINDEX("EmpresasGenerica.json");
-		DAOIndicador.setupINDEX("EmpresasGenerica.json");
+		DAOEmpresa.setupINDEX("src//main//java//DB//Empresas.json");
+		DAOIndicador.setupINDEX("src//main//java//DB//Empresas.json");
 		
 		VentanaPrincipal ventanaP = new VentanaPrincipal();
 		try {

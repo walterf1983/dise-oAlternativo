@@ -51,11 +51,11 @@ public class PantallaCargarCuentas extends JFrame {
 	public PantallaCargarCuentas(JFrame fatherWindow, ArrayList<Cuenta> cuentasGlobales) {
 		setUndecorated(true);
 		PantallaCargarCuentas wind= this;
-		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("Empresas.json");
+		RepositorioDeEmpresas repoEmpresa=new RepositorioDeEmpresas("src//main//java//DB//Empresas.json");
 		repo=repoEmpresa;
 		this.father=(PantallaCuentas) fatherWindow;
 		this.cuentasGlobales=cuentasGlobales;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("ima.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setTitle("CargadorCuentas");
 		this.setBounds(fatherWindow.getX()-450,fatherWindow.getY(),450,375);//ubica con respecto a la ventana padre
 		setVisible(true);
