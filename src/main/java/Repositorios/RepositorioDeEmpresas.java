@@ -27,7 +27,7 @@ public class RepositorioDeEmpresas extends RepositorioGenerico {
 			.map(item->(Empresa)item)
 			.collect(Collectors.toList());
 		} catch (Exception e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 		return empresas;
 	}

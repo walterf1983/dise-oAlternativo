@@ -36,7 +36,7 @@ public class Analizador {
 		try {
 			Thread.sleep(7000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		ventanaP.dispose();
@@ -51,7 +51,7 @@ public class Analizador {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 		
 		ventanaW.dispose();
@@ -59,7 +59,7 @@ public class Analizador {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 		
 		@SuppressWarnings("unused")

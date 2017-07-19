@@ -204,7 +204,7 @@ import Objects.Periodo;
 		}
 		
 		public int addCuenta(String nombreEmpresa, String anio, String tipo, String cuenta, String valor){
-		
+			
 			int u=-1;
 			Double value=Double.parseDouble(valor);
 			ArrayList<Periodo>periodos=new ArrayList<Periodo>();
@@ -218,25 +218,26 @@ import Objects.Periodo;
 					try {
 						this.addItem(new Empresa(nombreEmpresa,periodos,this));
 					} catch (Exception e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 			
 				return 1;
 			}else{
 				empresa=this.buscarEmpresa(nombreEmpresa);
 				if(!empresa.estaPeriodo(Integer.parseInt(anio),tipo)){
+					
 					u=empresa.addCuenta(aCuentas.get(0), new Periodo(Integer.parseInt(anio),tipo,aCuentas,indicadores,this));
 				}else{
 				Periodo periodo=empresa.getPeriodo(Integer.parseInt(anio), tipo);
 				u=empresa.addCuenta(aCuentas.get(0),periodo);
-		
+				}
 				if(u==2||u==3||u==0)
 					try {
 						this.updateItem(nombreEmpresa, empresa);
 					} catch (Exception e) {
-						e.printStackTrace();
+					//	e.printStackTrace();
 					}
-				}
+				
 			}
 			return u;
 		}

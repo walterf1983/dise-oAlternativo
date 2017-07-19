@@ -212,6 +212,7 @@ public class PantallaAgregarCuenta extends JFrame {
 				JComboBox comboA;
 				JComboBox comboT;
 				
+			
 				if(fatherWindow.getClass().getName().equalsIgnoreCase("vistas.PantallaCuentas")){
 					PantallaCuentas win=(PantallaCuentas)fatherWindow;
 					comboE=win.getComboEmpresa();
@@ -247,6 +248,13 @@ public class PantallaAgregarCuenta extends JFrame {
 						else 
 							if(agregado==3)
 								JOptionPane.showMessageDialog(null,"Cuenta agregada a empresa existente con existencia de periodo.","Información" ,JOptionPane.INFORMATION_MESSAGE);
+				if(agregado==1 &&comboE.getItemCount()==1){
+					comboA.insertItemAt(Integer.parseInt(inAnio.getText()),0);
+					indexE=0;
+					indexA=0;
+					indexT=0;
+					comboT.insertItemAt((String)comboPeriodo.getSelectedItem(),0);
+				}
 				comboE.setSelectedIndex(indexE);
 				comboA.setSelectedIndex(indexA);
 				comboT.setSelectedIndex(indexT);
