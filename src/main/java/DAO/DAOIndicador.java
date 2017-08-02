@@ -8,7 +8,7 @@ import Objects.Empresa;
 import Objects.Indicador;
 import Objects.Periodo;
 
-public class DAOIndicador extends DAOEmpresa{
+public class DAOIndicador{
 
 	public DAOIndicador(String path) {
 		super(path);

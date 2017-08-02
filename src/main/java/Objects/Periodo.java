@@ -14,20 +14,14 @@ import DAO.DAOEmpresa;
 	private int anio;
 	private String tipo;
 	private ArrayList<Cuenta> cuentas;
-	private ArrayList<Indicador> indicadores;
 
 	
-	public Periodo(int anio, String tipo,ArrayList<Cuenta>cuentas,ArrayList<Indicador>indicadores,DAOEmpresa dao) {
+	public Periodo(int anio, String tipo,ArrayList<Cuenta>cuentas,DAOEmpresa dao) {
 		super();
 		this.id=dao.buscarIDPeriodo(anio, tipo);
 		this.anio = anio;
 		this.tipo = tipo;
 		this.cuentas = cuentas;
-		this.indicadores=indicadores;
-	}
-
-	public ArrayList<Indicador> getIndicadores() {
-		return indicadores;
 	}
 
 	public int getId() {

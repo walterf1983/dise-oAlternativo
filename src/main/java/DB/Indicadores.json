@@ -10,21 +10,23 @@
     "indicadores": []
   },
   {
-    "id": 1,
-    "nombre": "prueba",
+    "id": 2,
+    "nombre": "facturacionGanancial",
     "formula": "ganancia*2+facturacion",
     "cuentas": [
       "facturacion"
     ],
     "indicadores": [
-      "ganancia"
+      {
+        "id": 1,
+        "nombre": "ganancia",
+        "formula": "facturacion-perdida",
+        "cuentas": [
+          "facturacion",
+          "perdida"
+        ],
+        "indicadores": []
+      }
     ]
-  },
-  {
-    "id": 1,
-    "nombre": "",
-    "formula": "",
-    "cuentas": [],
-    "indicadores": []
   }
 ]

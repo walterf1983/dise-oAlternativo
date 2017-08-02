@@ -6,6 +6,11 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Cursor;
+import java.awt.ComponentOrientation;
 
 @SuppressWarnings("serial")
 public class VentanaPrincipal1 extends JFrame {
@@ -40,6 +45,13 @@ public class VentanaPrincipal1 extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.setOpaque(true);
 		setContentPane(contentPane);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIconTextGap(2);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setIcon(new ImageIcon("src//main//java//VariablesGraficas//giphy.gif"));
+		lblNewLabel.setBounds(397, 195, 202, 164);
+		contentPane.add(lblNewLabel);
 		
 		setVisible(true);
 	}

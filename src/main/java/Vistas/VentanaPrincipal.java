@@ -28,6 +28,7 @@ import java.awt.Font;
 public class VentanaPrincipal extends JFrame{
 	
 	private JPanel contentPane;
+	private ImageIcon icon;
 
 	public VentanaPrincipal() {
 		setUndecorated(true);
@@ -48,7 +49,8 @@ public class VentanaPrincipal extends JFrame{
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setIconTextGap(7);
-		lblNewLabel.setIcon(new ImageIcon("src//main//java//VariablesGraficas//gato-18.gif"));
+		icon=new ImageIcon("src//main//java//VariablesGraficas//gato-18.gif");
+		lblNewLabel.setIcon(icon);
 		lblNewLabel.setBounds(10, 101, 243, 184);
 		contentPane.add(lblNewLabel);
 		

@@ -30,7 +30,7 @@ public class Analizador {
 		
 		PantallaAgregarCuenta.setCountInstance(0);
 		DAOEmpresa.setupINDEX("src//main//java//DB//Empresas.json");
-		DAOIndicador.setupINDEX("src//main//java//DB//Empresas.json");
+		//DAOIndicador.setupINDEX("src//main//java//DB//Empresas.json");
 		
 		VentanaPrincipal ventanaP = new VentanaPrincipal();
 		try {
@@ -49,7 +49,7 @@ public class Analizador {
 		VentanaPrincipal1 ventanaW = new VentanaPrincipal1();
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 		//	e.printStackTrace();
 		}

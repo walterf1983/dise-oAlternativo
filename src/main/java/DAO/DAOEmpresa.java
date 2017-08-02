@@ -1,13 +1,12 @@
 	package DAO;
 
-	import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import com.google.gson.reflect.TypeToken;
 
 import Objects.Cuenta;
 import Objects.Empresa;
-import Objects.Indicador;
 import Objects.Periodo;
 
 	public class DAOEmpresa extends DAOGenerico{
@@ -208,17 +207,15 @@ import Objects.Periodo;
 			int u=-1;
 			Double value=Double.parseDouble(valor);
 			ArrayList<Periodo>periodos=new ArrayList<Periodo>();
-			ArrayList<Indicador>indicadores=new ArrayList<Indicador>();
 			ArrayList<Cuenta>aCuentas=new ArrayList<Cuenta>();
 			aCuentas.add(new Cuenta(cuenta,value,this));
 			Empresa empresa;
 			if(!this.estaEmpresa(nombreEmpresa)){
-				periodos.add(new Periodo(Integer.parseInt(anio),tipo,aCuentas,indicadores,this));
+				periodos.add(new Periodo(Integer.parseInt(anio),tipo,aCuentas,this));
 			
 					try {
 						this.addItem(new Empresa(nombreEmpresa,periodos,this));
 					} catch (Exception e) {
-						//e.printStackTrace();
 					}
 			
 				return 1;
@@ -226,7 +223,7 @@ import Objects.Periodo;
 				empresa=this.buscarEmpresa(nombreEmpresa);
 				if(!empresa.estaPeriodo(Integer.parseInt(anio),tipo)){
 					
-					u=empresa.addCuenta(aCuentas.get(0), new Periodo(Integer.parseInt(anio),tipo,aCuentas,indicadores,this));
+					u=empresa.addCuenta(aCuentas.get(0), new Periodo(Integer.parseInt(anio),tipo,aCuentas,this));
 				}else{
 				Periodo periodo=empresa.getPeriodo(Integer.parseInt(anio), tipo);
 				u=empresa.addCuenta(aCuentas.get(0),periodo);
@@ -235,7 +232,6 @@ import Objects.Periodo;
 					try {
 						this.updateItem(nombreEmpresa, empresa);
 					} catch (Exception e) {
-					//	e.printStackTrace();
 					}
 				
 			}
