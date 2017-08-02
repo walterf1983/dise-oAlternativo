@@ -34,33 +34,6 @@ import javax.swing.DefaultComboBoxModel;
 @SuppressWarnings("serial")
 public class PantallaAgregarCuenta extends JFrame {
 
-	private static int countInstance;
-	private static int posY;
-	
-	public static int getPosY() {
-		return posY;
-	}
-
-	public static void setPosY(int posY) {
-		PantallaAgregarCuenta.posY = posY;
-	}
-
-	public static int getCountInstance() {
-		return countInstance;
-	}
-
-	public static void setCountInstance(int countInstance) {
-		PantallaAgregarCuenta.countInstance = countInstance;
-	}
-	
-
-	private JPanel contentPane;
-	private JTextField inEmpresa;
-	private JTextField inAnio;
-	private JComboBox<?> comboPeriodo;
-	private JTextField inCuenta;
-	private JTextField inValor;
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public PantallaAgregarCuenta(JFrame fatherWindow) {
 		this.setUndecorated(true);
@@ -273,8 +246,36 @@ public class PantallaAgregarCuenta extends JFrame {
 			this.comboPeriodo.setEnabled(false);
 		}
 	}
+
+
+	private static int countInstance;
+	private static int posY;
 	
-		private boolean asegurarIngresoTextoUsuario(String caracteresValidos,String ingreso){
+	public static int getPosY() {
+		return posY;
+	}
+
+	public static void setPosY(int posY) {
+		PantallaAgregarCuenta.posY = posY;
+	}
+
+	public static int getCountInstance() {
+		return countInstance;
+	}
+
+	public static void setCountInstance(int countInstance) {
+		PantallaAgregarCuenta.countInstance = countInstance;
+	}
+	
+
+	private JPanel contentPane;
+	private JTextField inEmpresa;
+	private JTextField inAnio;
+	private JComboBox<?> comboPeriodo;
+	private JTextField inCuenta;
+	private JTextField inValor;
+	
+	private boolean asegurarIngresoTextoUsuario(String caracteresValidos,String ingreso){
 			for(int i=0;i<ingreso.length();i++){
 				if(!caracteresValidos.contains(String.valueOf(ingreso.charAt(i)))){
 					return true;

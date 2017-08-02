@@ -32,16 +32,18 @@ public class VentanaPrincipal extends JFrame{
 	public VentanaPrincipal() {
 		setUndecorated(true);
 		setResizable(true);
-		this.setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src//main//java//VariablesGraficas//ima.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension dimensionWindows=Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((dimensionWindows.width-418)/2,(dimensionWindows.height-320)/2,418,320);
+		
 		contentPane = new JPanel();
 		contentPane.setEnabled(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
